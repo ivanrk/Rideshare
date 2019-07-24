@@ -17,7 +17,7 @@ else
             <form method="post">
                 <h4>Create new travel</h4>
                 <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="StartingPoint"></label>
                     <input asp-for="StartingPoint" class="form-control" />
@@ -40,7 +40,7 @@ else
                 </div>
                 <div class="form-group">
                     <label asp-for="AvailableSeats"></label>
-                    <input asp-for="AvailableSeats" min="1" class="form-control" />
+                    <input asp-for="AvailableSeats" class="form-control" />
                     <span asp-validation-for="AvailableSeats" class="text-danger"></span>
                 </div>
                 <div class="form-group">

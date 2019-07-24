@@ -14,8 +14,10 @@
         public string Destination { get; set; }
 
         [Display(Name = "When")]
+        [DataType(DataType.DateTime)]
         public DateTime TravelTime { get; set; }
 
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Display(Name = "Number of available seats")]
@@ -23,7 +25,5 @@
 
         [Display(Name = "Additional information")]
         public string AdditionalInfo { get; set; }
-
-        public string DriverId { get; set; }
     }
 }

@@ -155,8 +155,36 @@
         [Authorize]
         public async Task<IActionResult> Create()
         {
-            var ownerId = this.userManager.GetUserId(User);
-            var availableCars = await this.cars.AllAsync(ownerId);
+            List<SelectListItem> cars = await SetCarsList();
+
+            return View(new TravelFormViewModel
+            {
+                TravelTime = DateTime.UtcNow.Date.AddDays(1),
+                Cars = cars
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(TravelFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Cars = await this.SetCarsList();
+                return View(model);
+            }
+
+            var driverId = this.userManager.GetUserId(User);
+
+            await this.travels.CreateAsync(model.StartingPoint, model.Destination, model.TravelTime, model.Price,
+                model.AvailableSeats, model.AdditionalInfo, driverId, model.SelectedCar);
+
+            return RedirectToAction(nameof(UsersController.UpcomingTravels), "Users");
+        }
+
+        private async Task<List<SelectListItem>> SetCarsList()
+        {
+            var userId = this.userManager.GetUserId(User);
+            var availableCars = await this.cars.AllAsync(userId);
 
             var cars = availableCars
                 .Select(c => new SelectListItem
@@ -166,22 +194,7 @@
                 })
                 .ToList();
 
-            return View(new TravelFormViewModel
-            {
-                TravelTime = DateTime.UtcNow.Date,
-                Cars = cars
-            });
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(TravelFormViewModel model)
-        {
-            var driverId = this.userManager.GetUserId(User);
-
-            await this.travels.CreateAsync(model.StartingPoint, model.Destination, model.TravelTime, model.Price,
-                model.AvailableSeats, model.AdditionalInfo, driverId, model.SelectedCar);
-
-            return RedirectToAction(nameof(UsersController.UpcomingTravels), "Users");
+            return cars;
         }
 
         private async Task<List<SelectListItem>> SetPassengersList(string driverId, List<UserProfileModel> passengers)
