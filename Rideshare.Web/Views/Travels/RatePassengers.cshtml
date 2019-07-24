@@ -40,6 +40,7 @@
                         <textarea asp-for="Comment" rows="5" class="form-control"></textarea>
                         <span asp-validation-for="Comment" class="text-danger"></span>
                     </div>
+                    <input asp-for="TravelId" type="hidden" value="@Model.TravelId" />
                     <button type="submit" class="btn btn-success col-md-4">Add Review</button>
                 </form>
             </div>
