@@ -1,0 +1,44 @@
+﻿@model IEnumerable<TravelListingModel>
+
+    <div class="row">
+        @foreach (var travel in Model)
+        {
+            var driver = travel.Driver;
+            var profilePictureSrc = (driver.ProfilePicture != null) ? driver.ProfilePicture : "/images/noImage.png";
+
+            <div class="col-md-6">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <img src="@profilePictureSrc" class="rounded-circle" style="height:6vw;" /><br />
+                                <span>@travel.Driver.Name</span><br />
+                                @for (int i = 0; i < driver.AverageRating; i++)
+                                {
+                                    <span><i class="fas fa-star fa-xs text-primary"></i></span>
+                                    //filled rating stars
+                                }
+                                @for (int i = 0; i < 5 - driver.AverageRating; i++)
+                                {
+                                    <span><i class="far fa-star fa-xs"></i></span>
+                                    //blank rating stars
+                                }
+                            </div>
+                            <div class="col-md-5">
+                                <p><i class="fas fa-map-marker-alt"></i> From: @travel.StartingPoint</p>
+                                <p><i class="far fa-calendar-alt"></i> Date: @travel.TravelTime.ToShortDateString()</p>
+                                <p><i class="fas fa-money-bill-wave"></i> Price: @travel.Price.ToString("F2") lv.</p>
+                                <p><i class="fas fa-car"></i> Vehicle: @travel.Car</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><i class="fas fa-map-marker-alt"></i> To: @travel.Destination</p>
+                                <p><i class="far fa-clock"></i> Time: @travel.TravelTime.ToShortTimeString()</p>
+                                <p><i class="fas fa-users"></i> Taken seats: @travel.Passengers/@travel.AvailableSeats</p>
+                                <a asp-action="Details" asp-route-id="@travel.Id" class="btn btn-block btn-primary">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

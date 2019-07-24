@@ -1,0 +1,15 @@
+﻿
+@{
+    var carId = ViewBag.Id;
+    ViewData["Title"] = "Are you sure you want to delete your car?";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="DeleteCar" method="post">
+    <input type="hidden" name="id" value="@carId" />
+    <input type="submit" class="btn btn-danger" value="Yes" />
+    <a asp-action="All" class="btn btn-light">No</a>
+</form>
+

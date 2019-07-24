@@ -1,0 +1,22 @@
+﻿@model IEnumerable<TravelListingModel>
+@{
+    ViewData["Title"] = "Active";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+@if (!Model.Any())
+{
+    <p>No travels in the near future available.</p>
+}
+else
+{
+    <form asp-action="Search" method="post" class="form-inline">
+        <input type="text" name="start" class="form-control" placeholder="From" style="margin-right:5px;" />
+        <input type="text" name="destination" class="form-control" placeholder="To" style="margin-right:5px;" />
+        <input type="submit" class="btn btn-warning" value="Search" />
+    </form><br />
+
+    <partial name="_TravelListingPartial" />
+}
+

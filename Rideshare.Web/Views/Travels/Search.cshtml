@@ -1,0 +1,18 @@
+﻿@model IEnumerable<TravelListingModel>
+
+@{
+    ViewData["Title"] = $"Found results: {Model.Count()}";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Any())
+{
+    <p>No results matching your criteria were found.</p>
+}
+else
+{
+    <partial name="_TravelListingPartial" />
+}
+

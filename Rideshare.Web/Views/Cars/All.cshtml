@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CarListingModel>
+
+@{
+    ViewData["Title"] = "My cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Any())
+{
+    <span>You have no cars added to your profile. To add a car, <a asp-action="Create">click here.</a></span>
+}
+else
+{
+    <a asp-action="Create" class="btn btn-success">Add new car</a><br /><br />
+    <div class="row text-center">
+        @foreach (var car in Model)
+        {
+            var photoSrc = (car.Photo != null) ? @car.Photo : "/images/noImage.png";
+
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" style="height:250px;" src="@photoSrc" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@car.Make @car.Model</h5>
+                    <p class="card-text">@car.Year</p>
+                    <form asp-action="Edit" method="get">
+                        <input type="hidden" name="id" value="@car.Id" />
+                        <input type="submit" class="btn btn-warning btn-block" value="Edit" />
+                    </form>
+                    <form asp-action="Delete" method="get">
+                        <input type="hidden" name="id" value="@car.Id" />
+                        <input type="submit" class="btn btn-danger btn-block" value="Delete" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+}
+

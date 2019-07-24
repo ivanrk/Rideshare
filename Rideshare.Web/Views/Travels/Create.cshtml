@@ -1,0 +1,65 @@
+﻿@model TravelFormViewModel
+@{
+    ViewData["Title"] = "Travels";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Cars.Any())
+{
+    <span>To access this page you need to add information about your vehicle. To do so, <a asp-controller="Cars" asp-action="Create">click here.</a></span>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post">
+                <h4>Create new travel</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="StartingPoint"></label>
+                    <input asp-for="StartingPoint" class="form-control" />
+                    <span asp-validation-for="StartingPoint" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Destination"></label>
+                    <input asp-for="Destination" class="form-control" />
+                    <span asp-validation-for="Destination" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TravelTime"></label>
+                    <input asp-for="TravelTime" class="form-control" />
+                    <span asp-validation-for="TravelTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AvailableSeats"></label>
+                    <input asp-for="AvailableSeats" min="1" class="form-control" />
+                    <span asp-validation-for="AvailableSeats" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cars"></label>
+                    <select name="SelectedCar" asp-items="Model.Cars" class="form-control"></select>
+                    <span asp-validation-for="Cars" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdditionalInfo"></label>
+                    <textarea asp-for="AdditionalInfo" rows="5" class="form-control"></textarea>
+                    <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-success col-md-4">Create Travel</button>
+            </form>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

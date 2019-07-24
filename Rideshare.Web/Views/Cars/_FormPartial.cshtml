@@ -1,0 +1,70 @@
+﻿@model CarFormModel
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="Make"></label>
+    <input asp-for="Make" class="form-control" />
+    <span asp-validation-for="Make" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Model"></label>
+    <input asp-for="Model" class="form-control" />
+    <span asp-validation-for="Model" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Color"></label>
+    <input asp-for="Color" class="form-control" />
+    <span asp-validation-for="Color" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Year"></label>
+    <input asp-for="Year" class="form-control" />
+    <span asp-validation-for="Year" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Photo"></label>
+    <input asp-for="Photo" class="form-control" />
+    <span asp-validation-for="Photo" class="text-danger"></span>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-check">
+            <input asp-for="HasRoomForLuggage" />
+            <i class="fas fa-suitcase-rolling"></i>
+            <label asp-for="HasRoomForLuggage"></label>
+            <span asp-validation-for="HasRoomForLuggage" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <input asp-for="HasAirConditioner" />
+            <i class="fas fa-snowflake"></i>
+            <label asp-for="HasAirConditioner"></label>
+            <span asp-validation-for="HasAirConditioner" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <input asp-for="IsSmokingAllowed" />
+            <i class="fas fa-smoking"></i>
+            <label asp-for="IsSmokingAllowed"></label>
+            <span asp-validation-for="IsSmokingAllowed" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-check">
+            <input asp-for="IsFoodAllowed" />
+            <i class="fas fa-hamburger"></i>
+            <label asp-for="IsFoodAllowed"></label>
+            <span asp-validation-for="IsFoodAllowed" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <input asp-for="AreDrinksAllowed" />
+            <i class="fas fa-coffee"></i>
+            <label asp-for="AreDrinksAllowed"></label>
+            <span asp-validation-for="AreDrinksAllowed" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <input asp-for="ArePetsAllowed" />
+            <i class="fas fa-paw"></i>
+            <label asp-for="ArePetsAllowed"></label>
+            <span asp-validation-for="ArePetsAllowed" class="text-danger"></span>
+        </div>
+    </div>
+</div>

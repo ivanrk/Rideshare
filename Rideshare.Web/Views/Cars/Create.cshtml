@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "My Cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post" enctype="multipart/form-data">
+            <h4>Add new car</h4>
+            <hr />
+            <partial name="_FormPartial" />
+            <button type="submit" class="btn btn-success col-md-4">Add Car</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

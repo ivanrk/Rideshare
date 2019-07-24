@@ -1,0 +1,52 @@
+﻿@model IEnumerable<UserTravelListingModel>
+
+@{
+    ViewData["Title"] = "My upcoming travels";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!Model.Any())
+{
+    <p>You have no upcoming travels.</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-bordered table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>When</th>
+                        <th>At</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var travel in Model)
+                    {
+                        <tr>
+                            <td>@travel.StartingPoint</td>
+                            <td>@travel.Destination</td>
+                            <td>@travel.TravelTime.ToShortDateString()</td>
+                            <td>@travel.TravelTime.ToShortTimeString()</td>
+                            <td>
+                                @if (travel.UserIsDriver && travel.Applicants > 0)
+                                {
+                                    <a asp-controller="Travels" asp-action="Details" asp-route-id="@travel.Id" class="text-danger">Applicants (@travel.Applicants)</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Travels" asp-action="Details" asp-route-id="@travel.Id" class="btn btn-success btn-block">Details</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

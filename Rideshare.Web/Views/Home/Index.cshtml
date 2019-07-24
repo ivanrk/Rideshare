@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="jumbotron text-center rounded" style="background-color:bisque;">
+    <div class="container">
+        <h1 class="jumbotron-heading">Rideshare</h1>
+        <p class="lead">Travel comfortably, pay less, meet new people.</p>
+        <hr class="my-1 col-md-6" />
+        <p class="lead text-muted">I am a</p>
+        <p>
+            <a asp-controller="Travels" asp-action="Create" class="btn btn-primary my-2 col-md-2">Driver</a>
+            <a asp-controller="Travels" asp-action="Index" class="btn btn-secondary my-2 col-md-2">Passenger</a>
+        </p>
+    </div>
+</section>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center bg-warning mb-3" style="height:220px;">
+            <h5 class="card-header">Drivers</h5>
+            <div class="card-body" style="font-size:20px;">
+                <p class="card-text">
+                    As a driver you can accept or reject applications from passengers who want to join your travel.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center text-white bg-primary mb-3" style="height:260px; margin-top:50px;">
+            <h5 class="card-header">Reviews</h5>
+            <div class="card-body" style="font-size:20px;">
+                <p class="card-text">
+                    Both sides can rate each other after the travel is over. Reviews are unique for each user,
+                    which means that you can rate a user only once even if you travel multiple times together.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center bg-warning mb-3" style="height:220px;">
+            <h5 class="card-header">Passengers</h5>
+            <div class="card-body" style="font-size:20px;">
+                <p class="card-text">As a passenger you can apply to many travels until a driver accepts you.</p>
+            </div>
+        </div>
+    </div>
+</div>

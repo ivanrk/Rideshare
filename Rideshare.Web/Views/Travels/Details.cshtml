@@ -1,0 +1,299 @@
+﻿@model TravelDetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var travel = Model.Travel;
+    var car = Model.Car;
+    var driver = Model.Driver;
+    var passengers = Model.Passengers;
+    var applicants = Model.Applicants;
+
+    var photoSrc = (car.Photo != null) ? car.Photo : "/images/noImage.png";
+    var profilePictureSrc = (driver.ProfilePicture != null) ? driver.ProfilePicture : "/images/noImage.png";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @if ((travel.TravelTime < DateTime.UtcNow.ToLocalTime() || travel.Passengers == travel.AvailableSeats) && !Model.UserIsInTravel && !Model.UserIsTheDriver)
+        {
+            <div class="alert alert-danger" role="alert">
+                Travel is unavailable.
+            </div>
+        }
+    </div>
+    <div class="col">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+    <div class="col-md-3">
+        @if (travel.Passengers < travel.AvailableSeats && travel.TravelTime > DateTime.UtcNow.ToLocalTime()
+  && !Model.UserIsTheDriver && !Model.UserIsInTravel)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (Model.UserHasApplied)
+                {
+                    <a asp-action="Cancel" asp-route-id="@travel.Id" class="btn btn-danger btn-block"><i class="fas fa-user-minus"></i> Cancel Application</a>
+                }
+                else
+                {
+                    <a asp-action="Apply" asp-route-id="@travel.Id" class="btn btn-success btn-block"><i class="fas fa-user-plus"></i> Apply</a>
+                }
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>You are not logged in.</strong>
+                    Please log in or register if you want to sign up for this travel.
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <p class="text-muted">Detailed information</p>
+        <div class="card">
+            <div class="card-header bg-white">
+                <h4 class="text-center">
+                    <i class="fas fa-map-marker-alt text-success"></i>
+                    @travel.StartingPoint >
+                    <i class="fas fa-map-marker-alt text-success"></i>
+                    @travel.Destination
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            <i class="far fa-calendar-alt"></i> Date: @travel.TravelTime.ToShortDateString()
+                        </p>
+                        <p class="card-text">
+                            <i class="fas fa-money-bill-wave"></i> Price: @travel.Price.ToString("F2") lv.
+                        </p>
+                    </div>
+                    <div class="col-md-5">
+                        <p class="card-text">
+                            <i class="far fa-clock"></i> Time: @travel.TravelTime.ToShortTimeString()
+                        </p>
+                        <p class="card-text">
+                            <i class="fas fa-users"></i> Taken seats: @travel.Passengers/@travel.AvailableSeats
+                        </p>
+                        <p></p>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="card-text"><i class="fas fa-info-circle"></i> Additional information: </p>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                @if (travel.AdditionalInfo == null)
+                                {
+                                    <span>No additional info added.</span>
+                                }
+                                else
+                                {
+                                    <span>@travel.AdditionalInfo</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted">Driver</p>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="@profilePictureSrc" width="90" alt="Image" class="rounded-circle">
+                            </div>
+                            <div class="col-md-8">
+                                <h4>
+                                    <a asp-controller="Users" asp-action="Profile" asp-route-username="@driver.Username">@driver.Name</a>
+                                </h4>
+                                <span class="text-muted">Rating</span><br />
+                                @for (int i = 0; i < driver.AverageRating; i++)
+                                {
+                                    <span><i class="fas fa-star text-primary"></i></span>
+                                    //filled rating stars
+                                }
+                                @for (int i = 0; i < 5 - driver.AverageRating; i++)
+                                {
+                                    <span><i class="far fa-star"></i></span>
+                                    //blank rating stars
+                                }
+                                <span>/ @driver.TotalVotes votes</span>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <p>
+                                    <i class="fas fa-phone"></i>
+                                    Phone number:
+                                    @if (Model.UserIsTheDriver)
+                                    {
+                                        @driver.PhoneNumber
+                                    }
+                                    else
+                                    {
+                                        @(Model.UserIsInTravel ? @driver.PhoneNumber : "becomes visible when you get accepted for this travel.")
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-7">
+        <p class="text-muted">Vehicle</p>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="@photoSrc" width="150" alt="Image" class="rounded-circle">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-text"> Make: @car.Make</p>
+                                <p class="card-text"> Color: @car.Color</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-text"> Model: @car.Model</p>
+                                <p class="card-text"> Year: @car.Year</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-text">
+                                    <i class="fas fa-suitcase-rolling"></i> Luggage: @(car.HasRoomForLuggage == true ? "Yes" : "No")
+                                </p>
+                                <p class="card-text">
+                                    <i class="fas fa-smoking"></i> Smoking: @(car.IsSmokingAllowed == true ? "Yes" : "No")
+                                </p>
+                                <p class="card-text">
+                                    <i class="fas fa-coffee"></i> Drinks: @(car.AreDrinksAllowed == true ? "Yes" : "No")
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-text">
+                                    <i class="fas fa-snowflake"></i> Air Conditioner: @(car.HasRoomForLuggage == true ? "Yes" : "No")
+                                </p>
+                                <p class="card-text">
+                                    <i class="fas fa-hamburger"></i> Food: @(car.IsSmokingAllowed == true ? "Yes" : "No")
+                                </p>
+                                <p class="card-text">
+                                    <i class="fas fa-paw"></i> Pets: @(car.AreDrinksAllowed == true ? "Yes" : "No")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        @if (Model.UserIsTheDriver && travel.Passengers < travel.AvailableSeats
+        && travel.TravelTime > DateTime.UtcNow.ToLocalTime())
+        {
+            <p class="text-muted">Applications</p>
+
+            if (applicants.Count == 0)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <p>User applications to join your travel will appear here.</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (var applicant in applicants)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>
+                                <a asp-controller="Users" asp-action="Profile" asp-route-username="@applicant.Username">@applicant.Name</a>
+                            </h3>
+                            <span class="text-muted">Rating</span><br />
+                            @for (int i = 0; i < applicant.AverageRating; i++)
+                            {
+                                <span><i class="fas fa-star text-primary"></i></span>
+                                //filled rating stars
+                            }
+                            @for (int i = 0; i < 5 - applicant.AverageRating; i++)
+                            {
+                                <span><i class="far fa-star"></i></span>
+                                //blank rating stars
+                            }
+                            <span>/ @applicant.TotalVotes votes</span>
+                        </div>
+                    </div>
+                    <form asp-action="Accept" asp-route-id="@travel.Id" method="post">
+                        <input type="hidden" name="userId" value="@applicant.Id" />
+                        <input type="submit" class="btn btn-success btn-block" value="Accept" />
+                    </form>
+                    <form asp-action="Reject" asp-route-id="@travel.Id" method="post">
+                        <input type="hidden" name="userId" value="@applicant.Id" />
+                        <input type="submit" class="btn btn-danger btn-block" value="Reject" />
+                    </form>
+                }
+            }
+            <br />
+        }
+        <p class="text-muted">Passengers</p>
+
+        @if (passengers.Count == 0)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <p>Passengers will appear here when they get accepted.</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (var passenger in passengers)
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <h3>
+                            <a asp-controller="Users" asp-action="Profile" asp-route-username="@passenger.Username">@passenger.Name</a>
+                        </h3>
+                        @if (Model.UserIsTheDriver)
+                        {
+                            <p>@passenger.PhoneNumber</p>
+                        }
+                        <span class="text-muted">Rating</span><br />
+                        @for (int i = 0; i < passenger.AverageRating; i++)
+                        {
+                            <span><i class="fas fa-star text-primary"></i></span>
+                            //filled rating stars
+                        }
+                        @for (int i = 0; i < 5 - passenger.AverageRating; i++)
+                        {
+                            <span><i class="far fa-star"></i></span>
+                            //blank rating stars
+                        }
+                        <span>/ @passenger.TotalVotes votes</span>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

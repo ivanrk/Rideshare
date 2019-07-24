@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Rideshare.Data.Models;
+@inject UserManager<User> userManager
+@model UserDetailsModel
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var passengerTimes = Model.TimesAsAPassenger == 1 ? "time" : "times";
+    var driverTimes = Model.TimesAsADriver == 1 ? "time" : "times";
+    var profilePictureSrc = (Model.ProfilePicture != null) ?
+        @Model.ProfilePicture : "/images/noImage.png";
+}
+
+<div class="row">
+    <div class="col-md-4 text-center">
+        <span class="text-muted">Profile of</span>
+        <h2>
+            @Model.Name
+            @if (this.userManager.GetUserId(User) == Model.Id)
+            {
+                <a href="/Identity/Account/Manage" class="btn btn-info btn-sm">Edit</a>
+            }
+        </h2>
+        <img src="@profilePictureSrc" class="rounded-circle" style="height:18vw;" /><br />
+        <span class="text-muted">Rating</span><br />
+        @for (int i = 0; i < Model.AverageRating; i++)
+        {
+            <i class="fas fa-star text-primary"></i>
+            //filled rating stars
+        }
+        @for (int i = 0; i < 5 - Model.AverageRating; i++)
+        {
+            <i class="far fa-star"></i>
+            //blank rating stars
+        }
+        <span>/ @Model.TotalVotes votes</span><br /><br />
+
+
+        <a class="btn btn-light col-md-7"><h5>Passenger / @Model.TimesAsAPassenger @passengerTimes</h5></a>
+        <a class="btn btn-light col-md-7"><h5>Driver / @Model.TimesAsADriver @driverTimes</h5></a>
+    </div>
+    <div class="col-md-8" style="margin-top:100px;">
+        @if (Model.Reviews.Count == 0)
+        {
+            <div class="card bg-light">
+                <div class="card-body">
+                    <p>User has no reviews yet.</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h4>Reviews from other users</h4>
+            @foreach (var review in Model.Reviews)
+            {
+                var author = await this.userManager.FindByIdAsync(review.AuthorId);
+
+                <div class="card alert-info">
+                    <div class="card-body">
+                        <span><strong><a asp-action="Profile" asp-route-username="@author.UserName">@author.Name</a></strong></span><br />
+                        @for (int i = 0; i < review.Rating; i++)
+                        {
+                            <i class="fas fa-star text-primary"></i>
+                            //filled rating stars
+                        }
+                        @for (int i = 0; i < 5 - review.Rating; i++)
+                        {
+                            <i class="far fa-star"></i>
+                            //blank rating stars
+                        }
+                        <p></p>
+                        @if (review.Comment == null)
+                        {
+                            <div class="alert alert-light text-muted" role="alert">
+                                <span>User has not left a comment.</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-light" role="alert">
+                                <span>@review.Comment</span>
+                            </div>
+                        }
+                    </div>
+                </div><br />
+            }
+        }
+    </div>
+</div>
+
