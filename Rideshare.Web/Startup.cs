@@ -87,7 +87,6 @@
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseAuthentication();
 
@@ -101,6 +100,8 @@
                     name: "profile",
                     template: "[controller]/[action]/{username}");
             });
+
+            app.UseCookiePolicy();
         }
     }
 }

@@ -19,6 +19,11 @@
 
         public async Task<IActionResult> Profile(string username)
         {
+            if (username == null)
+            {
+                return NotFound();
+            }
+
             var user = await this.userManager.FindByNameAsync(username);
 
             if (user == null)
