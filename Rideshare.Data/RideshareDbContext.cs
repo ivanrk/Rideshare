@@ -17,6 +17,8 @@
 
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -46,6 +48,12 @@
                 .HasOne(c => c.Owner)
                 .WithMany(o => o.Cars)
                 .HasForeignKey(c => c.OwnerId);
+
+            builder
+                .Entity<Message>()
+                .HasOne(m => m.Recipient)
+                .WithMany(r => r.Messages)
+                .HasForeignKey(m => m.RecipientId);
 
             builder
                 .Entity<Car>()

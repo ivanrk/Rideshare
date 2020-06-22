@@ -13,7 +13,7 @@
     {
         private readonly ICarService cars;
         private readonly IPhotoService photos;
-        private UserManager<User> userManager;
+        private readonly UserManager<User> userManager;
 
         public CarsController(ICarService cars, IPhotoService photos, UserManager<User> userManager)
         {

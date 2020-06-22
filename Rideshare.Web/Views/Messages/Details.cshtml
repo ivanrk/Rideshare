@@ -1,0 +1,41 @@
+﻿@inject UserManager<User> userManager
+@model MessageDetailsModel
+
+@{
+    ViewData["Title"] = "Message details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var profilePictureSrc = (Model.SenderProfilePicture != null) ?
+    @Model.SenderProfilePicture : "/images/noImage.png";
+
+    var currentUserId = userManager.GetUserId(User);
+}
+
+<h1>@ViewData["Title"]</h1><br />
+
+<div class="row">
+    <div class="col-md-2 text-center">
+        <img src="@profilePictureSrc" class="rounded-circle" style="height:12vw;" /><br />
+        <a asp-controller="Users" asp-action="Profile" asp-route-username="@Model.Sender">@Model.Sender</a>
+    </div>
+    <div class="col-md-8">
+        <div class="card bg-light">
+            <div class="card-body">
+                <p>
+                    <b>@Model.Title</b><br />
+                    <b>Sent: </b>@Model.DateTime<br />
+                    <b>From: </b><a asp-controller="Users" asp-action="Profile" asp-route-username="@Model.Sender">@Model.Sender</a><br />
+                    <b>To: </b><a asp-controller="Users" asp-action="Profile" asp-route-username="@Model.Recipient">@Model.Recipient</a>
+                </p>
+                <hr />
+                <p>@Model.Content</p>
+            </div>
+        </div><br />
+        @if (currentUserId == Model.RecipientId)
+        {
+            <form asp-controller="Messages" asp-action="Send" method="get">
+                <input type="submit" class="btn btn-success btn-block col-md-2" value="Reply" />
+                <input type="hidden" name="recipient" value="@Model.Sender" />
+            </form>
+        }
+    </div>
+</div>

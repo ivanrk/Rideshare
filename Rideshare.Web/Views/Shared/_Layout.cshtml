@@ -77,6 +77,12 @@
                     @TempData["Success"]
                 </div>
             }
+            else if (TempData.ContainsKey("Error"))
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
 
             @RenderBody()
         </main>

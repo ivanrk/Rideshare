@@ -58,6 +58,7 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IPhotoService, PhotoService>();
+            services.AddTransient<IMessageService, MessageService>();
 
             Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             services.AddAutoMapper();

@@ -3,6 +3,7 @@
     using AutoMapper;
     using Rideshare.Data.Models;
     using Rideshare.Services.Models.Cars;
+    using Rideshare.Services.Models.Messages;
     using Rideshare.Services.Models.Travels;
     using Rideshare.Services.Models.Users;
     using System;
@@ -48,6 +49,13 @@
             CreateMap<User, UserBasicProfileModel>()
                 .ForMember(u => u.ProfilePicture, opt => opt.MapFrom(u => ConvertFromBytes(u.ProfilePicture)))
                 .ForMember(u => u.AverageRating, opt => opt.MapFrom(u => SetAverageRating(u.Reviews)));
+
+            CreateMap<Message, MessageFormModel>();
+
+            CreateMap<Message, MessageListingModel>();
+
+            CreateMap<Message, MessageDetailsModel>()
+                .ForMember(m => m.SenderProfilePicture, opt => opt.MapFrom(m => ConvertFromBytes(m.Sender.ProfilePicture)));          
         }
 
         private static decimal SetAverageRating(List<Review> reviews)

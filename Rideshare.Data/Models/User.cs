@@ -18,5 +18,7 @@
         public List<Review> Reviews { get; set; } = new List<Review>();
 
         public List<Car> Cars { get; set; } = new List<Car>();
+
+        public List<Message> Messages { get; set; } = new List<Message>();
     }
 }

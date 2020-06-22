@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MessageListingModel>
+
+@{
+    ViewData["Title"] = "Received";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Messages</h1>
+<hr /><br />
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item"><a class="nav-link" asp-action="Send">Send new message</a></li>
+            <li class="nav-item"><a class="nav-link active" asp-action="Received">Received</a></li>
+            <li class="nav-item"><a class="nav-link" asp-action="Sent">Sent</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-9">
+        @if (!Model.Any())
+        {
+            <h3>Your message box is empty!</h3>
+        }
+        else
+        {
+            foreach (var message in Model)
+            {
+                <p>
+                    <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
+                    <a asp-controller="Messages" asp-action="Details" asp-route-id="@message.Id">@message.Title</a><br />
+                    From: <a asp-controller="Users" asp-action="Profile" asp-route-username="@message.Sender">@message.Sender</a> » @message.DateTime
+                </p>
+            }
+        }
+    </div>
+</div>
+
