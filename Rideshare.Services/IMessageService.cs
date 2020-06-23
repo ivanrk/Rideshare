@@ -14,5 +14,9 @@
         Task SendAsync(string title, string content, string senderId, string recipientId, DateTime dateTime);
 
         Task<MessageDetailsModel> DetailsByIdAsync(string id);
+
+        Task MarkAsReadAsync(string id);
+
+        Task MarkAsUnreadAsync(string id);
     }
 }

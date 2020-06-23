@@ -73,7 +73,23 @@
         }
 
         public async Task<IActionResult> Details(string id)
-            => View(await this.messages.DetailsByIdAsync(id));
+        {
+            var message = await this.messages.DetailsByIdAsync(id);
+
+            if (message.RecipientId == GetCurrentUserId())
+            {
+                await this.messages.MarkAsReadAsync(id);
+            }
+                
+            return View(message);
+        }
+
+        public async Task<IActionResult> MarkAsUnread(string id)
+        {
+            await this.messages.MarkAsUnreadAsync(id);
+
+            return RedirectToAction(nameof(Received));
+        }
 
         private string GetCurrentUserId()
             => this.userManager.GetUserId(User);

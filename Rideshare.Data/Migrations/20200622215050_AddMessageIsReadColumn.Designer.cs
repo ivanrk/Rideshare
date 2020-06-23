@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rideshare.Data;
 
 namespace Rideshare.Data.Migrations
 {
     [DbContext(typeof(RideshareDbContext))]
-    partial class RideshareDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200622215050_AddMessageIsReadColumn")]
+    partial class AddMessageIsReadColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

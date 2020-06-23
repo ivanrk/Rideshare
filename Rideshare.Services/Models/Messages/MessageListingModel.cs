@@ -13,5 +13,7 @@
         public string Recipient { get; set; }
 
         public DateTime DateTime { get; set; }
+
+        public bool IsRead { get; set; }
     }
 }

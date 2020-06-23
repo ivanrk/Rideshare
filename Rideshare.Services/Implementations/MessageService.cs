@@ -39,7 +39,8 @@
                 Content = content,
                 SenderId = senderId,
                 RecipientId = recipientId,
-                DateTime = dateTime
+                DateTime = dateTime,
+                IsRead = false
             };
 
             this.db.Add(message);
@@ -51,5 +52,19 @@
                 .Where(m => m.Id == id)
                 .ProjectTo<MessageDetailsModel>()
                 .FirstOrDefaultAsync();
+
+        public async Task MarkAsReadAsync(string id)
+        {
+            var message = await this.db.Messages.FirstOrDefaultAsync(m => m.Id == id);
+            message.IsRead = true;
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task MarkAsUnreadAsync(string id)
+        {
+            var message = await this.db.Messages.FirstOrDefaultAsync(m => m.Id == id);
+            message.IsRead = false;
+            await this.db.SaveChangesAsync();
+        }
     }
 }

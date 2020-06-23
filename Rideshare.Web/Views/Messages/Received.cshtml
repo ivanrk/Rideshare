@@ -27,10 +27,21 @@
             foreach (var message in Model)
             {
                 <p>
-                    <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
-                    <a asp-controller="Messages" asp-action="Details" asp-route-id="@message.Id">@message.Title</a><br />
-                    From: <a asp-controller="Users" asp-action="Profile" asp-route-username="@message.Sender">@message.Sender</a> » @message.DateTime
+                    @if (message.IsRead)
+                    {
+                        <i class="fa fa-envelope-open fa-lg" aria-hidden="true"></i>
+                        <a asp-controller="Messages" asp-action="Details" asp-route-id="@message.Id">@message.Title</a><br />
+                        <span>From: <a asp-controller="Users" asp-action="Profile" asp-route-username="@message.Sender">@message.Sender</a> » @message.DateTime</span><br />
+                        <a asp-controller="Messages" asp-action="MarkAsUnread" asp-route-id="@message.Id" class="text-danger">Mark as unread</a>
+                    }
+                    else
+                    {
+                        <i class="fa fa-envelope fa-lg text-danger" aria-hidden="true"></i>
+                        <a asp-controller="Messages" asp-action="Details" asp-route-id="@message.Id">@message.Title</a><br />
+                        <span>From: <a asp-controller="Users" asp-action="Profile" asp-route-username="@message.Sender">@message.Sender</a> » @message.DateTime</span><br />
+                    }
                 </p>
+                <hr />
             }
         }
     </div>
