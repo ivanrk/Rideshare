@@ -23,4 +23,9 @@
     <ProjectReference Include="..\Rideshare.Services\Rideshare.Services.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Forum\Models\" />
+  </ItemGroup>
+
 </Project>
