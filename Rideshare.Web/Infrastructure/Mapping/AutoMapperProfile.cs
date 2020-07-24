@@ -2,7 +2,9 @@
 {
     using AutoMapper;
     using Rideshare.Data.Models;
+    using Rideshare.Data.Models.Forum;
     using Rideshare.Services.Models.Cars;
+    using Rideshare.Services.Models.Forum;
     using Rideshare.Services.Models.Messages;
     using Rideshare.Services.Models.Travels;
     using Rideshare.Services.Models.Users;
@@ -55,7 +57,11 @@
             CreateMap<Message, MessageListingModel>();
 
             CreateMap<Message, MessageDetailsModel>()
-                .ForMember(m => m.SenderProfilePicture, opt => opt.MapFrom(m => ConvertFromBytes(m.Sender.ProfilePicture)));          
+                .ForMember(m => m.SenderProfilePicture, opt => opt.MapFrom(m => ConvertFromBytes(m.Sender.ProfilePicture)));
+
+            CreateMap<Category, CategoryListingModel>();
+
+            CreateMap<Category, CategorySubforumsModel>();
         }
 
         private static decimal SetAverageRating(List<Review> reviews)

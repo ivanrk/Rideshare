@@ -1,8 +1,8 @@
 ﻿namespace Rideshare.Services.Admin.Forum.Implementations
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
     using Rideshare.Data.Models.Forum;
@@ -19,7 +19,7 @@
 
         public async Task<IEnumerable<CategoryListingModel>> AllAsync()
             => await this.db.Categories
-            .Select(c => new CategoryListingModel { Id = c.Id, Name = c.Name})
+            .ProjectTo<CategoryListingModel>()
             .ToListAsync();
 
         public async Task CreateAsync(string name)

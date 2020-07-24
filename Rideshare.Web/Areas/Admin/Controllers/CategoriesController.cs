@@ -14,7 +14,7 @@
             this.categories = categories;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> Index()
             => View(await this.categories.AllAsync());
 
         public IActionResult Create()
@@ -30,7 +30,7 @@
 
             await this.categories.CreateAsync(model.Name);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

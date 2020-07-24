@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CategoryListingModel>
+﻿@model IEnumerable<CategorySubforumsModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,12 +7,19 @@
 
 <h1>Index</h1>
 
-@foreach (var item in Model)
+@foreach (var category in Model)
 {
-    <p>@item.Name</p>
-    @foreach (var subforum in item.Subforums)
+    <p>@category.Name</p>
+    @if (category.Subforums.Count > 0)
     {
-        <p>@subforum.Name</p>
+        @foreach (var subforum in category.Subforums)
+        {
+            <h3>@subforum.Name</h3>
+        }
+    }
+    else
+    {
+        <h5>No subforums available.</h5>
     }
     <p>--------------------------</p>
 }

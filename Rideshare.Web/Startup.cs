@@ -13,6 +13,9 @@
     using Rideshare.Data;
     using Rideshare.Data.Models;
     using Rideshare.Services;
+    using Rideshare.Services.Admin.Forum;
+    using Rideshare.Services.Admin.Forum.Implementations;
+    using Rideshare.Services.Forum;
     using Rideshare.Services.Implementations;
     using Rideshare.Web.Infrastructure.Mapping;
     using System;
@@ -59,6 +62,9 @@
             services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IPhotoService, PhotoService>();
             services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ISubforumService, SubforumService>();
+            services.AddTransient<IForumService, ForumService>();
 
             Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             services.AddAutoMapper();

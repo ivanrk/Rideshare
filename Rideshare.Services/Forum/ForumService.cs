@@ -16,9 +16,9 @@
             this.db = db;
         }
 
-        public async Task<IEnumerable<CategoryListingModel>> ShowAsync()
+        public async Task<IEnumerable<CategorySubforumsModel>> ShowAsync()
             => await this.db.Categories
-                .ProjectTo<CategoryListingModel>()
+                .ProjectTo<CategorySubforumsModel>()
                 .ToListAsync();
     }
 }

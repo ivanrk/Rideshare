@@ -4,7 +4,7 @@
     using Rideshare.Services.Forum;
     using System.Threading.Tasks;
 
-    [Area("Admin")]
+    [Area("Forum")]
     public class HomeController : Controller
     {
         private readonly IForumService forum;

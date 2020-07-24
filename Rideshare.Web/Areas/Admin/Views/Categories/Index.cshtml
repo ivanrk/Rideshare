@@ -1,0 +1,16 @@
+﻿@model IEnumerable<CategoryListingModel>
+
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+@foreach (var category in Model)
+{
+    <p>@category.Name</p>
+    <p>-----------------------------</p>
+}
+

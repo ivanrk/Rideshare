@@ -6,6 +6,6 @@
 
     public interface IForumService
     {
-        Task<IEnumerable<CategoryListingModel>> ShowAsync();
+        Task<IEnumerable<CategorySubforumsModel>> ShowAsync();
     }
 }
