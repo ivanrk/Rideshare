@@ -12,13 +12,15 @@
         [Display(Name = "From")]
         public string Sender { get; set; }
 
+        public string SenderId { get; set; }
+
         [Display(Name = "To")]
         public string Recipient { get; set; }
+
+        public string RecipientId { get; set; }
 
         public DateTime DateTime { get; set; }
 
         public string SenderProfilePicture { get; set; }
-
-        public string RecipientId { get; set; }
     }
 }

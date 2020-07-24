@@ -75,12 +75,18 @@
         public async Task<IActionResult> Details(string id)
         {
             var message = await this.messages.DetailsByIdAsync(id);
+            var currentUserId = GetCurrentUserId();
+
+            if (message.SenderId != currentUserId && message.RecipientId != currentUserId)
+            {
+                return BadRequest();
+            }
 
             if (message.RecipientId == GetCurrentUserId())
             {
                 await this.messages.MarkAsReadAsync(id);
             }
-                
+
             return View(message);
         }
 

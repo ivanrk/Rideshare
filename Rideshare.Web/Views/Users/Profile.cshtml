@@ -22,6 +22,10 @@
             {
                 <a href="/Identity/Account/Manage" class="btn btn-info btn-sm">Edit</a>
             }
+            else
+            {
+                <a asp-controller="Messages" asp-action="Send" asp-route-recipient="@Model.Username" class="btn btn-info btn-sm">PM</a>
+            }
         </h2>
         <img src="@profilePictureSrc" class="rounded-circle" style="height:18vw;" /><br />
         <span class="text-muted">Rating</span><br />
