@@ -1,6 +1,7 @@
 ﻿namespace Rideshare.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
+    using Rideshare.Data.Models.Forum;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -20,5 +21,9 @@
         public List<Car> Cars { get; set; } = new List<Car>();
 
         public List<Message> Messages { get; set; } = new List<Message>();
+
+        public List<Topic> ForumTopics { get; set; } = new List<Topic>();
+
+        public List<Reply> ForumReplies { get; set; } = new List<Reply>();
     }
 }

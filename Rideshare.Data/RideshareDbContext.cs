@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data.Models;
+    using Rideshare.Data.Models.Forum;
 
     public class RideshareDbContext : IdentityDbContext<User>
     {
@@ -18,6 +19,14 @@
         public DbSet<Car> Cars { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Subforum> Subforums { get; set; }
+
+        public DbSet<Topic> Topics { get; set; }
+
+        public DbSet<Reply> Replies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -76,6 +85,36 @@
                 .HasOne(p => p.Travel)
                 .WithMany(t => t.Applicants)
                 .HasForeignKey(p => p.TravelId);
+
+            builder
+                .Entity<Category>()
+                .HasMany(c => c.Subforums)
+                .WithOne(s => s.Category)
+                .HasForeignKey(s => s.CategoryId);
+
+            builder
+                .Entity<Subforum>()
+                .HasMany(s => s.Topics)
+                .WithOne(t => t.Subforum)
+                .HasForeignKey(t => t.SubforumId);
+
+            builder
+                .Entity<Topic>()
+                .HasMany(t => t.Replies)
+                .WithOne(r => r.Topic)
+                .HasForeignKey(r => r.TopicId);
+
+            builder
+                .Entity<Topic>()
+                .HasOne(t => t.Author)
+                .WithMany(a => a.ForumTopics)
+                .HasForeignKey(t => t.AuthorId);
+
+            builder
+                .Entity<Reply>()
+                .HasOne(r => r.Author)
+                .WithMany(a => a.ForumReplies)
+                .HasForeignKey(r => r.AuthorId);
 
             base.OnModelCreating(builder);
         }
