@@ -5,6 +5,7 @@
     using Rideshare.Data.Models.Forum;
     using Rideshare.Services.Models.Cars;
     using Rideshare.Services.Models.Forum;
+    using Rideshare.Services.Models.Forum.Topics;
     using Rideshare.Services.Models.Messages;
     using Rideshare.Services.Models.Travels;
     using Rideshare.Services.Models.Users;
@@ -62,6 +63,8 @@
             CreateMap<Category, CategoryListingModel>();
 
             CreateMap<Category, CategorySubforumsModel>();
+
+            CreateMap<Topic, TopicListingModel>();
         }
 
         private static decimal SetAverageRating(List<Review> reviews)

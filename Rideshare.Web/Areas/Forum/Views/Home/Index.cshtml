@@ -14,7 +14,7 @@
     {
         @foreach (var subforum in category.Subforums)
         {
-            <h3>@subforum.Name</h3>
+            <a asp-controller="Topics" asp-action="All" asp-route-subforumId="@subforum.Id">@subforum.Name</a>
         }
     }
     else

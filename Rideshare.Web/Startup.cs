@@ -65,6 +65,7 @@
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ISubforumService, SubforumService>();
             services.AddTransient<IForumService, ForumService>();
+            services.AddTransient<ITopicService, TopicService>();
 
             Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
             services.AddAutoMapper();

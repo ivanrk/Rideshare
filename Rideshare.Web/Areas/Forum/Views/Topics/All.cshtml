@@ -1,0 +1,24 @@
+﻿@model TopicListingViewModel
+
+@{
+    ViewData["Title"] = "Topics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2">
+        <a asp-action="Create" asp-route-subforumId="@Model.SubforumId" class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> New topic</a>
+    </div>
+</div>
+
+@if (!Model.Topics.Any())
+{
+    <h5>There are no topics in this subforum.</h5>
+}
+else
+{
+    @foreach (var topic in Model.Topics)
+    {
+        <p>@topic.Name</p>
+    }
+}
