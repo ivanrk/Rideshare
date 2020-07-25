@@ -6,6 +6,10 @@
 
         public string Name { get; set; }
 
+        public string Author { get; set; }
+
+        public string Subforum { get; set; }
+
         public int RepliesCount { get; set; }
     }
 }

@@ -67,7 +67,8 @@
             CreateMap<Category, CategorySubforumsModel>();
 
             CreateMap<Topic, TopicListingModel>()
-                .ForMember(t => t.RepliesCount, opt => opt.MapFrom(t => t.Replies.Count));
+                .ForMember(t => t.RepliesCount, opt => opt.MapFrom(t => t.Replies.Count))
+                .ForMember(t => t.Subforum, opt => opt.MapFrom(t => t.Subforum.Name));
 
             CreateMap<Topic, TopicDetailsModel>();
 

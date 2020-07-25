@@ -3,22 +3,60 @@
 @{
     ViewData["Title"] = "Topics";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var subforumName = Model.Topics.Select(t => t.Subforum).FirstOrDefault();
+    var row = 1;
+    string trClass;
 }
 
 <div class="row">
     <div class="col-md-2">
-        <a asp-action="Create" asp-route-subforumId="@Model.SubforumId" class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> New topic</a>
+        <a asp-action="Create" asp-route-subforumId="@Model.SubforumId" class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> New topic</a><br />
     </div>
 </div>
 
-@if (!Model.Topics.Any())
+@if (Model.Topics.Any())
 {
-    <h5>There are no topics in this subforum.</h5>
+    <div class="row">
+        <div class="col-md-10 text-center">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="table-active">@subforumName</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Topic</th>
+                        <th>Author</th>
+                        <th>Statistics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var topic in Model.Topics)
+                    {
+                        if (row % 2 == 0)
+                        {
+                            trClass = "";
+                        }
+                        else
+                        {
+                            trClass = "table-info";
+                        }
+
+                        <tr class="@trClass">
+                            <th scope="row"><i class="fa fa-comments fa-lg" aria-hidden="true"></i></th>
+                            <td><a asp-action="Show" asp-route-id="@topic.Id"><em><strong>@topic.Name</strong></em></a></td>
+                            <td>@topic.Author</td>
+                            <td>@topic.RepliesCount replies</td>
+                        </tr>
+
+                        row++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
 else
 {
-    @foreach (var topic in Model.Topics)
-    {
-        <p><a asp-action="Show" asp-route-id="@topic.Id">@topic.Name</a> <span>@topic.RepliesCount replies</span></p>
-    }
+    <h5>There are no topics in this subforum.</h5>
 }
