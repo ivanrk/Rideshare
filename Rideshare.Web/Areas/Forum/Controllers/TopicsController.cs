@@ -31,6 +31,18 @@
             return View(topics);
         }
 
+        public async Task<IActionResult> Show(int id)
+        {
+            var topic = await this.topics.ByIdAsync(id);
+
+            if (topic == null)
+            {
+                return BadRequest();
+            }
+
+            return View(topic);
+        }
+
         public IActionResult Create(int subforumId)
             => View(new TopicFormViewModel { SubforumId = subforumId });
 

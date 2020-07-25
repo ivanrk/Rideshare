@@ -19,6 +19,6 @@ else
 {
     @foreach (var topic in Model.Topics)
     {
-        <p>@topic.Name</p>
+        <p><a asp-action="Show" asp-route-id="@topic.Id">@topic.Name</a></p>
     }
 }

@@ -65,6 +65,8 @@
             CreateMap<Category, CategorySubforumsModel>();
 
             CreateMap<Topic, TopicListingModel>();
+
+            CreateMap<Topic, TopicDetailsModel>();
         }
 
         private static decimal SetAverageRating(List<Review> reviews)

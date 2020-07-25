@@ -24,6 +24,12 @@
                 .ProjectTo<TopicListingModel>()
                 .ToListAsync();
 
+        public async Task<TopicDetailsModel> ByIdAsync(int id)
+            => await this.db.Topics
+                .Where(t => t.Id == id)
+                .ProjectTo<TopicDetailsModel>()
+                .FirstOrDefaultAsync();
+
         public async Task CreateAsync(string name, string content, string authorId, int subforumId)
         {
             var topic = new Topic

@@ -1,0 +1,12 @@
+﻿@model TopicDetailsModel
+
+@{
+    ViewData["Title"] = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Show</h1>
+
+<p>@Model.Name</p>
+<p>@Html.Raw(Model.Content)</p>
+
