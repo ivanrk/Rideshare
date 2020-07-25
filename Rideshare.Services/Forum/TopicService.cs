@@ -43,5 +43,18 @@
             this.db.Topics.Add(topic);
             await this.db.SaveChangesAsync();
         }
+
+        public async Task ReplyAsync(string content, string authorId, int topicId)
+        {
+            var reply = new Reply
+            {
+                Content = content,
+                AuthorId = authorId,
+                TopicId = topicId
+            };
+
+            this.db.Replies.Add(reply);
+            await this.db.SaveChangesAsync();
+        }
     }
 }

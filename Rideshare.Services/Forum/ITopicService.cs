@@ -11,5 +11,7 @@
         Task<TopicDetailsModel> ByIdAsync(int id);
 
         Task CreateAsync(string name, string content, string authorId, int subforumId);
+
+        Task ReplyAsync(string content, string authorId, int topicId);
     }
 }

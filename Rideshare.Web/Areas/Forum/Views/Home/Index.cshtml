@@ -16,7 +16,7 @@
         {
             <a asp-controller="Topics" asp-action="All" asp-route-subforumId="@subforum.Id">@subforum.Name</a>
             <span>Topics: @subforum.Topics.Count</span>
-            <span>Replies: @subforum.Topics.Select(t => t.Replies.Count).FirstOrDefault()</span>
+            <span>Replies: @subforum.Topics.Sum(t => t.RepliesCount)</span>
         }
     }
     else

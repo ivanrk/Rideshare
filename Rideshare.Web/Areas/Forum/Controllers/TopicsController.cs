@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Rideshare.Data.Models;
     using Rideshare.Services.Forum;
+    using Rideshare.Web.Areas.Forum.Models.Replies;
     using Rideshare.Web.Areas.Forum.Models.Topics;
     using System.Threading.Tasks;
 
@@ -58,7 +59,25 @@
             var authorId = this.userManager.GetUserId(User);
             await this.topics.CreateAsync(model.Name, model.Content, authorId, model.SubforumId);
 
-            return RedirectToAction(nameof(All), new { subforumId = model.SubforumId});
+            return RedirectToAction(nameof(All), new { subforumId = model.SubforumId });
+        }
+
+        public IActionResult Reply(int topicId)
+            => View(new ReplyFormViewModel { TopicId = topicId });
+
+        [HttpPost]
+        public async Task<IActionResult> Reply(ReplyFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            model.Content = this.html.Sanitize(model.Content);
+            var authorId = this.userManager.GetUserId(User);
+            await this.topics.ReplyAsync(model.Content, authorId, model.TopicId);
+
+            return RedirectToAction(nameof(Show), new { id = model.TopicId });
         }
     }
 }

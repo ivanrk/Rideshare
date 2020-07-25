@@ -6,7 +6,13 @@
 }
 
 <h1>Show</h1>
-
+<a asp-action="Reply" asp-route-topicId="@Model.Id" class="btn btn-success">Reply</a>
 <p>@Model.Name</p>
 <p>@Html.Raw(Model.Content)</p>
+
+@foreach (var reply in Model.Replies)
+{
+    <p>Author: @reply.Author.UserName</p>
+    <p>@Html.Raw(reply.Content)</p>
+}
 
