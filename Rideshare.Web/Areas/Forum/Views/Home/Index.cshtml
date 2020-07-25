@@ -3,26 +3,52 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var row = 1;
+    string trClass;
 }
 
-<h1>Index</h1>
+<h1>Forum</h1><br />
 
-@foreach (var category in Model)
-{
-    <p>@category.Name</p>
-    @if (category.Subforums.Count > 0)
-    {
-        @foreach (var subforum in category.Subforums)
+<div class="row">
+    <div class="col-md-10 text-center">
+        @foreach (var category in Model)
         {
-            <a asp-controller="Topics" asp-action="All" asp-route-subforumId="@subforum.Id">@subforum.Name</a>
-            <span>Topics: @subforum.Topics.Count</span>
-            <span>Replies: @subforum.Topics.Sum(t => t.RepliesCount)</span>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="table-active">@category.Name</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Subforum</th>
+                        <th>Statistics</th>
+                        <th>Last reply</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var subforum in category.Subforums)
+                    {
+                        if (row % 2 == 0)
+                        {
+                            trClass = "";
+                        }
+                        else
+                        {
+                            trClass = "table-info";
+                        }
+
+                        <tr class="@trClass">
+                            <th scope="row"><i class="fa fa-comments fa-lg" aria-hidden="true"></i></th>
+                            <td><a asp-controller="Topics" asp-action="All" asp-route-subforumId="@subforum.Id"><strong>@subforum.Name</strong></a>
+                            <td class="small">@subforum.Topics.Count topics <br />@subforum.Topics.Sum(t => t.RepliesCount) replies</td>
+                            <td></td>
+                        </tr>
+
+                        row++;
+                    }
+                </tbody>
+            </table>
         }
-    }
-    else
-    {
-        <h5>No subforums available.</h5>
-    }
-    <p>--------------------------</p>
-}
+    </div>
+</div>
 
