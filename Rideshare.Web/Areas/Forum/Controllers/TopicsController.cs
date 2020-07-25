@@ -1,6 +1,8 @@
 ﻿namespace Rideshare.Web.Areas.Forum.Controllers
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Rideshare.Data.Models;
     using Rideshare.Services.Forum;
     using Rideshare.Web.Areas.Forum.Models.Topics;
     using System.Threading.Tasks;
@@ -8,10 +10,14 @@
     public class TopicsController : BaseController
     {
         private readonly ITopicService topics;
+        private readonly IHtmlService html;
+        private readonly UserManager<User> userManager;
 
-        public TopicsController(ITopicService topics)
+        public TopicsController(ITopicService topics, IHtmlService html, UserManager<User> userManager)
         {
             this.topics = topics;
+            this.html = html;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> All(int subforumId)
@@ -23,6 +29,24 @@
             };
 
             return View(topics);
+        }
+
+        public IActionResult Create(int subforumId)
+            => View(new TopicFormViewModel { SubforumId = subforumId });
+
+        [HttpPost]
+        public async Task<IActionResult> Create(TopicFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            model.Content = this.html.Sanitize(model.Content);
+            var authorId = this.userManager.GetUserId(User);
+            await this.topics.CreateAsync(model.Name, model.Content, authorId, model.SubforumId);
+
+            return RedirectToAction(nameof(All), new { subforumId = model.SubforumId});
         }
     }
 }
