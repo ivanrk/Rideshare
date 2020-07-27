@@ -68,7 +68,9 @@
 
             CreateMap<Topic, TopicListingModel>()
                 .ForMember(t => t.RepliesCount, opt => opt.MapFrom(t => t.Replies.Count))
-                .ForMember(t => t.Subforum, opt => opt.MapFrom(t => t.Subforum.Name));
+                .ForMember(t => t.Subforum, opt => opt.MapFrom(t => t.Subforum.Name))
+                .ForMember(t => t.LastReplyAuthor, opt => opt.MapFrom(t => t.Replies.Count > 0 ? t.Replies.OrderByDescending(r => r.Published).FirstOrDefault().Author.UserName : t.Author.UserName))
+                .ForMember(t => t.LastReplyPublished, opt => opt.MapFrom(t => t.Replies.Count > 0 ? t.Replies.OrderByDescending(r => r.Published).FirstOrDefault().Published : t.Published));
 
             CreateMap<Topic, TopicDetailsModel>();
 
