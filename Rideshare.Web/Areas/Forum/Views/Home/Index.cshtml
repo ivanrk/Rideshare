@@ -22,12 +22,14 @@
                         <th></th>
                         <th>Subforum</th>
                         <th>Statistics</th>
-                        <th>Last reply</th>
+                        <th>Last post</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var subforum in category.Subforums)
                     {
+                        var lastSubforumActivity = subforum.Topics.OrderByDescending(t => t.LastReplyPublished).FirstOrDefault();
+
                         if (row % 2 == 0)
                         {
                             trClass = "";
@@ -41,7 +43,10 @@
                             <th scope="row"><i class="fa fa-comments fa-lg" aria-hidden="true"></i></th>
                             <td><a asp-controller="Topics" asp-action="All" asp-route-subforumId="@subforum.Id"><strong>@subforum.Name</strong></a>
                             <td class="small">@subforum.Topics.Count topics <br />@subforum.Topics.Sum(t => t.RepliesCount) replies</td>
-                            <td></td>
+                            <td class="small">
+                                <a asp-controller="Topics" asp-action="Show" asp-route-id="@lastSubforumActivity.Id">@lastSubforumActivity.Name</a>
+                                <br /> @lastSubforumActivity.LastReplyAuthor » @lastSubforumActivity.LastReplyPublished
+                            </td>
                         </tr>
 
                         row++;
