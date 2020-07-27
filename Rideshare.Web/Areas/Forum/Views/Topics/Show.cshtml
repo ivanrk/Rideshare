@@ -3,16 +3,56 @@
 @{
     ViewData["Title"] = "Show";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var profilePictureSrc = (Model.Author.ProfilePicture != null) ?
+    @Model.Author.ProfilePicture : "/images/noImage.png";
 }
 
-<h1>Show</h1>
-<a asp-action="Reply" asp-route-topicId="@Model.Id" class="btn btn-success">Reply</a>
-<p>@Model.Name</p>
-<p>@Html.Raw(Model.Content)</p>
+<h1>@Model.Name</h1>
+<p><a asp-action="Reply" asp-route-topicId="@Model.Id" class="btn btn-primary rounded-0 col-md-2">Reply</a></p>
+
+<div class="row text-center">
+    <div class="card badge-light col-md-3 rounded-0">
+        <div class="card-body">
+            <p>@Model.Author.Username</p>
+            <img src="@profilePictureSrc" class="rounded" style="max-height: 160px;" />
+            <p class="small">Posts: 2223</p>
+        </div>
+    </div>
+    <div class="card alert-info col-md-7 rounded-0">
+        <div class="card-body">
+            <div class="small">@Model.Name</div>
+            <hr />
+            <p>@Html.Raw(Model.Content)</p>
+        </div>
+    </div>
+</div>
+
+
 
 @foreach (var reply in Model.Replies)
 {
-    <p>Author: @reply.Author.UserName</p>
-    <p>@Html.Raw(reply.Content)</p>
+    <div class="row text-center mt-2">
+        <div class="card badge-light col-md-3 rounded-0">
+            <div class="card-body">
+                <p>@reply.Author.Username</p>
+                @if (reply.Author.ProfilePicture != null)
+                {
+                    <img src="@reply.Author.ProfilePicture" class="rounded" style="max-height:160px;" />
+                }
+                else
+                {
+                    <img src="~/images/noImage.png" class="rounded" style="max-height:160px;" />
+                }
+                <p class="small">Posts: 2223</p>
+            </div>
+        </div>
+        <div class="card alert-info col-md-7 rounded-0">
+            <div class="card-body">
+                <div class="small">Re: @Model.Name</div>
+                <hr />
+                <p><p>@Html.Raw(reply.Content)</p>
+            </div>
+        </div>
+    </div>
 }
 

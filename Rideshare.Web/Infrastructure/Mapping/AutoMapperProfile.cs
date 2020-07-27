@@ -72,6 +72,9 @@
 
             CreateMap<Topic, TopicDetailsModel>();
 
+            CreateMap<User, TopicUserModel>()
+                .ForMember(u => u.ProfilePicture, opt => opt.MapFrom(u => ConvertFromBytes(u.ProfilePicture)));
+
             CreateMap<Subforum, SubforumTopicsModel>();
 
             CreateMap<Reply, ReplyListingModel>();

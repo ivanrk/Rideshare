@@ -11,6 +11,8 @@
 
         public string Content { get; set; }
 
+        public TopicUserModel Author { get; set; }
+
         public List<ReplyListingModel> Replies { get; set; }
     }
 }
