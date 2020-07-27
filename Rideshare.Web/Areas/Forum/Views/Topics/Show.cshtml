@@ -15,7 +15,7 @@
         <div class="card-body">
             <p>@Model.Author.Username</p>
             <img src="@profilePictureSrc" class="rounded" style="max-height: 160px;" />
-            <p class="small">Posts: 2223</p>
+            <p class="small">Posts: @Model.Author.PostsCount</p>
         </div>
     </div>
     <div class="card alert-info col-md-7 rounded-0">
@@ -43,7 +43,7 @@
                 {
                     <img src="~/images/noImage.png" class="rounded" style="max-height:160px;" />
                 }
-                <p class="small">Posts: 2223</p>
+                <p class="small">Posts: @reply.Author.PostsCount</p>
             </div>
         </div>
         <div class="card alert-info col-md-7 rounded-0">
