@@ -1,5 +1,6 @@
 ﻿namespace Rideshare.Data.Models.Forum
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +13,8 @@
 
         [Required]
         public string Content { get; set; }
+
+        public DateTime Published { get; set; }
 
         public string AuthorId { get; set; }
 

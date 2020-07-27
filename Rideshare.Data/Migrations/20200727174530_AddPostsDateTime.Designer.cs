@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rideshare.Data;
 
 namespace Rideshare.Data.Migrations
 {
     [DbContext(typeof(RideshareDbContext))]
-    partial class RideshareDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200727174530_AddPostsDateTime")]
+    partial class AddPostsDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System;
 
     public class TopicService : ITopicService
     {
@@ -36,6 +37,7 @@
             {
                 Name = name,
                 Content = content,
+                Published = DateTime.UtcNow,
                 AuthorId = authorId,
                 SubforumId = subforumId
             };
@@ -49,6 +51,7 @@
             var reply = new Reply
             {
                 Content = content,
+                Published = DateTime.UtcNow,
                 AuthorId = authorId,
                 TopicId = topicId
             };
