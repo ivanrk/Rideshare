@@ -17,7 +17,6 @@
                     <h4 class="card-title">@category.Name</h4>
                     <p class="card-text text-muted">@category.SubforumsCount subforums <br /> @category.TopicsCount topics</p>
                     <a asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning btn-block">Edit</a>
-                    <a asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger btn-block">Delete</a>
                 </div>
             </div>
         </div>

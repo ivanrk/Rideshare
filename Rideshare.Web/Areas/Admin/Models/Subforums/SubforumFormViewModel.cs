@@ -6,11 +6,15 @@
 
     public class SubforumFormViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 
         public int SelectedCategory { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
+
+        public int CurrentCategoryId { get; set; }
     }
 }

@@ -44,8 +44,11 @@
                             <td><a asp-controller="Topics" asp-action="All" asp-route-subforumId="@subforum.Id"><strong>@subforum.Name</strong></a>
                             <td class="small">@subforum.Topics.Count topics <br />@subforum.Topics.Sum(t => t.RepliesCount) replies</td>
                             <td class="small">
-                                <a asp-controller="Topics" asp-action="Show" asp-route-id="@lastSubforumActivity.Id">@lastSubforumActivity.Name</a>
-                                <br /> @lastSubforumActivity.LastReplyAuthor » @lastSubforumActivity.LastReplyPublished
+                                @if (lastSubforumActivity != null)
+                                {
+                                    <a asp-controller="Topics" asp-action="Show" asp-route-id="@lastSubforumActivity.Id">@lastSubforumActivity.Name</a>
+                                    <br /> <span>@lastSubforumActivity.LastReplyAuthor » @lastSubforumActivity.LastReplyPublished</span>
+                                }
                             </td>
                         </tr>
 

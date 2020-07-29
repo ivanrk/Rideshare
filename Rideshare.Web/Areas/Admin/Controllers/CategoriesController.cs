@@ -35,7 +35,16 @@
         }
 
         public async Task<IActionResult> Edit(int id)
-            => View(await this.categories.ByIdAsync(id));
+        {
+            var category = await this.categories.ByIdAsync(id);
+
+            if (category == null)
+            {
+                return BadRequest();
+            }
+
+            return View(category);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Edit(CategoryListingModel model)

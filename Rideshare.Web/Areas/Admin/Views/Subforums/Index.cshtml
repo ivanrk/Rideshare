@@ -5,15 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 class="text-center" style="margin-bottom: 50px;">Subforums</h1><br />
 
 @foreach (var category in Model)
 {
-    <p>@category.Name</p>
-    @foreach (var subforum in category.Subforums)
-    {
-        <h3>@subforum.Name</h3>
-    }
-    <p>----------------</p>
+    <h5 class="text-center">Category: @category.Name</h5>
+    <hr />
+    <div class="row">
+        @foreach (var subforum in category.Subforums)
+        {
+            <div class="col-md-3">
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">@subforum.Name</h4>
+                        <p class="card-text text-muted">@subforum.Topics.Count topics <br /> @subforum.Topics.Sum(t => t.RepliesCount) replies</p>
+                        <a asp-controller="Subforums" asp-action="Edit" asp-route-id="@subforum.Id" class="btn btn-warning btn-block">Edit</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
-

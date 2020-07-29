@@ -5,7 +5,9 @@
     using Rideshare.Data;
     using Rideshare.Data.Models.Forum;
     using Rideshare.Services.Models.Forum;
+    using Rideshare.Services.Models.Forum.Subforums;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class SubforumService : ISubforumService
@@ -22,6 +24,12 @@
             .ProjectTo<CategorySubforumsModel>()
             .ToListAsync();
 
+        public async Task<SubforumBasicModel> ByIdAsync(int id)
+            => await this.db.Subforums
+            .Where(s => s.Id == id)
+            .ProjectTo<SubforumBasicModel>()
+            .FirstOrDefaultAsync();
+
         public async Task CreateAsync(string name, int categoryId)
         {
             var subforumExists = await this.db.Subforums.AnyAsync(sf => sf.Name == name);
@@ -32,6 +40,19 @@
                 this.db.Subforums.Add(subforum);
                 await this.db.SaveChangesAsync();
             }
+        }
+
+        public async Task EditAsync(int id, string name, int categoryId)
+        {
+            var subforum = await this.db.Subforums.Where(s => s.Id == id).FirstOrDefaultAsync();
+
+            if (subforum != null)
+            {
+                subforum.Name = name;
+                subforum.CategoryId = categoryId;
+            }
+
+            await this.db.SaveChangesAsync();
         }
     }
 }

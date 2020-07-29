@@ -80,6 +80,8 @@
                 .ForMember(u => u.ProfilePicture, opt => opt.MapFrom(u => ConvertFromBytes(u.ProfilePicture)))
                 .ForMember(u => u.PostsCount, opt => opt.MapFrom(u => u.ForumTopics.Count + u.ForumReplies.Count));
 
+            CreateMap<Subforum, SubforumBasicModel>();
+
             CreateMap<Subforum, SubforumTopicsModel>();
 
             CreateMap<Reply, ReplyListingModel>();
