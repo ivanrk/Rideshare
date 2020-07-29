@@ -62,7 +62,9 @@
             CreateMap<Message, MessageDetailsModel>()
                 .ForMember(m => m.SenderProfilePicture, opt => opt.MapFrom(m => ConvertFromBytes(m.Sender.ProfilePicture)));
 
-            CreateMap<Category, CategoryListingModel>();
+            CreateMap<Category, CategoryListingModel>()
+                .ForMember(c => c.SubforumsCount, opt => opt.MapFrom(c => c.Subforums.Count))
+                .ForMember(c => c.TopicsCount, opt => opt.MapFrom(c => c.Subforums.Sum(s => s.Topics.Count)));
 
             CreateMap<Category, CategorySubforumsModel>();
 

@@ -1,6 +1,7 @@
 ﻿namespace Rideshare.Services.Admin.Forum.Implementations
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,12 @@
             .ProjectTo<CategoryListingModel>()
             .ToListAsync();
 
+        public async Task<CategoryListingModel> ByIdAsync(int id)
+            => await this.db.Categories
+            .Where(c => c.Id == id)
+            .ProjectTo<CategoryListingModel>()
+            .FirstOrDefaultAsync();
+
         public async Task CreateAsync(string name)
         {
             var categoryExists = await this.db.Categories.AnyAsync(c => c.Name == name);
@@ -32,6 +39,14 @@
                 this.db.Categories.Add(category);
                 await this.db.SaveChangesAsync();
             }
+        }
+
+        public async Task EditAsync(int id, string name)
+        {
+            var category = await this.db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+            category.Name = name;
+
+            await this.db.SaveChangesAsync();
         }
     }
 }

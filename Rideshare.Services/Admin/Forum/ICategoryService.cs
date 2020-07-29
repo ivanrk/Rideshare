@@ -8,6 +8,10 @@
     {
         Task<IEnumerable<CategoryListingModel>> AllAsync();
 
+        Task<CategoryListingModel> ByIdAsync(int id);
+
         Task CreateAsync(string name);
+
+        Task EditAsync(int id, string name);
     }
 }
