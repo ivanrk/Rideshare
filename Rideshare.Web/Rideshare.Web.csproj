@@ -23,4 +23,9 @@
     <ProjectReference Include="..\Rideshare.Services\Rideshare.Services.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Include="wwwroot\js\hideForumCategories.js" />
+  </ItemGroup>
+
 </Project>

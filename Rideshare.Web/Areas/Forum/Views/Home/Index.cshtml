@@ -16,7 +16,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th colspan="4" class="table-active">@category.Name</th>
+                        <th colspan="4" class="table-active">@category.Name <i class="fa fa-minus-circle" id="hide" aria-hidden="true"></i></th>
                     </tr>
                     <tr>
                         <th></th>
@@ -60,3 +60,5 @@
     </div>
 </div>
 
+<script src="~/js/hideForumCategories.js" type="text/javascript"></script>
+<script>hide();</script>
