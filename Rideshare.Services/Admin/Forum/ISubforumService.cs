@@ -14,5 +14,7 @@
         Task CreateAsync(string name, int categoryId);
 
         Task EditAsync(int id, string name, int categoryId);
+
+        Task<bool> Exists(int id);
     }
 }

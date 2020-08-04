@@ -1,8 +1,10 @@
 ﻿namespace Rideshare.Web.Areas.Forum.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Rideshare.Data.Models;
+    using Rideshare.Services.Admin.Forum;
     using Rideshare.Services.Forum;
     using Rideshare.Web.Areas.Forum.Models.Replies;
     using Rideshare.Web.Areas.Forum.Models.Topics;
@@ -10,19 +12,26 @@
 
     public class TopicsController : BaseController
     {
-        private readonly ITopicService topics;
         private readonly IHtmlService html;
+        private readonly ITopicService topics;
+        private readonly ISubforumService subforums;
         private readonly UserManager<User> userManager;
 
-        public TopicsController(ITopicService topics, IHtmlService html, UserManager<User> userManager)
+        public TopicsController(IHtmlService html, ITopicService topics, ISubforumService subforums, UserManager<User> userManager)
         {
-            this.topics = topics;
             this.html = html;
+            this.topics = topics;
+            this.subforums = subforums;
             this.userManager = userManager;
         }
 
         public async Task<IActionResult> All(int subforumId)
         {
+            if (!await SubforumExists(subforumId))
+            {
+                return NotFound();
+            }
+
             var topics = new TopicListingViewModel
             {
                 SubforumId = subforumId,
@@ -44,9 +53,18 @@
             return View(topic);
         }
 
-        public IActionResult Create(int subforumId)
-            => View(new TopicFormViewModel { SubforumId = subforumId });
+        [Authorize]
+        public async Task<IActionResult> Create(int subforumId)
+        {
+            if (!await SubforumExists(subforumId))
+            {
+                return NotFound();
+            }
 
+            return View(new TopicFormViewModel { SubforumId = subforumId });
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(TopicFormViewModel model)
         {
@@ -55,16 +73,31 @@
                 return View(model);
             }
 
+            if (!await SubforumExists(model.SubforumId))
+            {
+                return BadRequest();
+            }
+
             model.Content = this.html.Sanitize(model.Content);
             var authorId = this.userManager.GetUserId(User);
+
             await this.topics.CreateAsync(model.Name, model.Content, authorId, model.SubforumId);
 
             return RedirectToAction(nameof(All), new { subforumId = model.SubforumId });
         }
 
-        public IActionResult Reply(int topicId)
-            => View(new ReplyFormViewModel { TopicId = topicId });
+        [Authorize]
+        public async Task<IActionResult> Reply(int topicId)
+        {
+            if (!await TopicExists(topicId))
+            {
+                return NotFound();
+            }
 
+            return View(new ReplyFormViewModel { TopicId = topicId });
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Reply(ReplyFormViewModel model)
         {
@@ -73,11 +106,22 @@
                 return View(model);
             }
 
+            if (!await TopicExists(model.TopicId))
+            {
+                return BadRequest();
+            }
+
             model.Content = this.html.Sanitize(model.Content);
             var authorId = this.userManager.GetUserId(User);
             await this.topics.ReplyAsync(model.Content, authorId, model.TopicId);
 
             return RedirectToAction(nameof(Show), new { id = model.TopicId });
         }
+
+        private async Task<bool> SubforumExists(int subforumId)
+            => await this.subforums.Exists(subforumId);
+
+        private async Task<bool> TopicExists(int topicId)
+            => await this.topics.Exists(topicId);
     }
 }

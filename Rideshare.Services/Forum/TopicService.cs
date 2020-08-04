@@ -59,5 +59,8 @@
             this.db.Replies.Add(reply);
             await this.db.SaveChangesAsync();
         }
+
+        public async Task<bool> Exists(int id)
+            => await this.db.Topics.AnyAsync(t => t.Id == id);
     }
 }

@@ -54,5 +54,8 @@
 
             await this.db.SaveChangesAsync();
         }
+
+        public async Task<bool> Exists(int id)
+            => await this.db.Subforums.AnyAsync(s => s.Id == id);
     }
 }
