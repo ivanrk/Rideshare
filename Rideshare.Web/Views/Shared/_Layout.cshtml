@@ -66,6 +66,21 @@
                                 <a class="nav-link text-danger" asp-area="" asp-controller="Messages" asp-action="Received"><i class="far fa-envelope"></i> PMs</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Forum" asp-controller="Home" asp-action="Index">Forum</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown show">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Categories">Categories</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Subforums">Subforums</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

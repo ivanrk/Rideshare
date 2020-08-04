@@ -19,6 +19,7 @@
     using Rideshare.Services.Implementations;
     using Rideshare.Web.Infrastructure.Mapping;
     using System;
+    using System.Threading.Tasks;
 
     public class Startup
     {
@@ -80,7 +81,7 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -115,6 +116,39 @@
             });
 
             app.UseCookiePolicy();
+
+            CreateRoles(serviceProvider);
+        }
+
+        private void CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            Task.Run(async () =>
+            {
+                var roles = new string[] { "Admin" };
+
+                foreach (var role in roles)
+                {
+                    var roleExists = await roleManager.RoleExistsAsync(role);
+
+                    if (!roleExists)
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(role));
+                    }
+                }
+
+                var adminRole = "Admin";
+                var adminUser = await userManager.FindByEmailAsync("test@test.com");
+                var isInRole = await userManager.IsInRoleAsync(adminUser, adminRole);
+
+                if (!isInRole)
+                {
+                    await userManager.AddToRoleAsync(adminUser, adminRole);
+                }
+            })
+            .Wait();
         }
     }
 }
