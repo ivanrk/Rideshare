@@ -17,7 +17,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Categories"></label>
-                <select name="SelectedCategory" asp-items="Model.Categories" class="form-control"></select>
+                <select name="SelectedCategory" class="form-control">
+                    @foreach (var category in Model.Categories)
+                    {
+                        if (category.Value.ToString() == Model.CurrentCategoryId.ToString())
+                        {
+                            <option value="@category.Value.ToString()" selected>@category.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@category.Value.ToString()">@category.Text</option>
+                        }
+                    }
+                </select>
                 <span asp-validation-for="Categories" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-success col-md-4">Create</button>

@@ -23,12 +23,19 @@
         public async Task<IActionResult> Index()
             => View(await this.subforums.AllAsync());
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int? categoryId)
         {
             var categories = await this.categories.AllAsync();
             var categoriesList = SetCategoriesList(categories);
 
-            return View(new SubforumFormViewModel { Categories = categoriesList });
+            var model = new SubforumFormViewModel { Categories = categoriesList };
+
+            if (categoryId != null)
+            {
+                model.CurrentCategoryId = (int)categoryId;
+            }
+
+            return View(model);
         }
 
         [HttpPost]

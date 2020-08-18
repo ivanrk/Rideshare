@@ -1,28 +1,34 @@
 ﻿@model IEnumerable<CategorySubforumsModel>
 
-@{
+    @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    }
 
-<h1 class="text-center" style="margin-bottom: 50px;">Subforums</h1><br />
+    <h1 class="text-center" style="margin-bottom:50px;">Subforums</h1>
 
-@foreach (var category in Model)
-{
-    <h5 class="text-center">Category: @category.Name</h5>
+    @foreach (var category in Model)
+    {
+    <form asp-action="Create" method="get">
+        <h5 class="text-center">
+            Category: @category.Name
+            <input type="submit" class="btn btn-success float-right" value="Create"/>
+            <input type="hidden" name="categoryId" value="@category.Id" />
+        </h5>
+    </form>
     <hr />
     <div class="row">
         @foreach (var subforum in category.Subforums)
         {
-            <div class="col-md-3">
-                <div class="card" style="margin-bottom:20px;">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">@subforum.Name</h4>
-                        <p class="card-text text-muted">@subforum.Topics.Count topics <br /> @subforum.Topics.Sum(t => t.RepliesCount) replies</p>
-                        <a asp-controller="Subforums" asp-action="Edit" asp-route-id="@subforum.Id" class="btn btn-warning btn-block">Edit</a>
-                    </div>
+        <div class="col-md-3">
+            <div class="card" style="margin-bottom:20px;">
+                <div class="card-body text-center">
+                    <h4 class="card-title">@subforum.Name</h4>
+                    <p class="card-text text-muted">@subforum.Topics.Count topics <br /> @subforum.Topics.Sum(t => t.RepliesCount) replies</p>
+                    <a asp-controller="Subforums" asp-action="Edit" asp-route-id="@subforum.Id" class="btn btn-warning btn-block">Edit</a>
                 </div>
             </div>
+        </div>
         }
     </div>
-}
+    }
