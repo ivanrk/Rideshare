@@ -47,7 +47,7 @@
                                 @if (lastSubforumActivity != null)
                                 {
                                     <a asp-controller="Topics" asp-action="Show" asp-route-id="@lastSubforumActivity.Id">@lastSubforumActivity.Name</a>
-                                    <br /> <span>@lastSubforumActivity.LastReplyAuthor » @lastSubforumActivity.LastReplyPublished</span>
+                                    <br /> <span>@lastSubforumActivity.LastReplyAuthor » @lastSubforumActivity.LastReplyPublished.ToString("dd.M.yyyy г. HH:mm ч.")</span>
                                 }
                             </td>
                         </tr>

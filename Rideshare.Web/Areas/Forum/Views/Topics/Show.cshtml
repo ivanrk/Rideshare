@@ -20,7 +20,7 @@
     </div>
     <div class="card alert-info col-md-7 rounded-0">
         <div class="card-body">
-            <div class="small text-center">@Model.Name » @Model.Published</div>
+            <div class="small text-center">@Model.Name » @Model.Published.ToString("dd.M.yyyy г. HH:mm ч.")</div>
             <hr />
             <p>@Html.Raw(Model.Content)</p>
         </div>
@@ -48,7 +48,7 @@
         </div>
         <div class="card alert-info col-md-7 rounded-0">
             <div class="card-body">
-                <div class="small text-center">Re: @Model.Name » @reply.Published</div>
+                <div class="small text-center">Re: @Model.Name » @reply.Published.ToString("dd.M.yyyy г. HH:mm ч.")</div>
                 <hr />
                 <p><p>@Html.Raw(reply.Content)</p>
             </div>

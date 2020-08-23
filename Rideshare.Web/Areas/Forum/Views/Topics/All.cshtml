@@ -48,7 +48,7 @@
                             <td><a asp-action="Show" asp-route-id="@topic.Id"><em><strong>@topic.Name</strong></em></a></td>
                             <td>@topic.Author</td>
                             <td>@topic.RepliesCount replies</td>
-                            <td>@topic.LastReplyAuthor » @topic.LastReplyPublished</td>
+                            <td>@topic.LastReplyAuthor » @topic.LastReplyPublished.ToString("dd.M.yyyy г. HH:mm ч.")</td>
                         </tr>
 
                         row++;
