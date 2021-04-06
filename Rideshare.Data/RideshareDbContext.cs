@@ -2,6 +2,8 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Rideshare.Data.Configurations;
+    using Rideshare.Data.Configurations.Forum;
     using Rideshare.Data.Models;
     using Rideshare.Data.Models.Forum;
 
@@ -30,91 +32,27 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder
-                .Entity<PassengerTravel>()
-                .HasKey(pt => new { pt.PassengerId, pt.TravelId });
+            builder.ApplyConfiguration(new TravelConfiguration());
 
-            builder
-                .Entity<PassengerTravel>()
-                .HasOne(t => t.Passenger)
-                .WithMany(p => p.Travels)
-                .HasForeignKey(t => t.PassengerId);
+            builder.ApplyConfiguration(new PassengerTravelConfiguration());
 
-            builder
-                .Entity<PassengerTravel>()
-                .HasOne(p => p.Travel)
-                .WithMany(t => t.Passengers)
-                .HasForeignKey(p => p.TravelId);
+            builder.ApplyConfiguration(new ReviewConfiguration());
 
-            builder
-                .Entity<Review>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Reviews)
-                .HasForeignKey(r => r.UserId);
+            builder.ApplyConfiguration(new UserConfiguration());
 
-            builder
-                .Entity<Car>()
-                .HasOne(c => c.Owner)
-                .WithMany(o => o.Cars)
-                .HasForeignKey(c => c.OwnerId);
+            builder.ApplyConfiguration(new MessageConfiguration());
 
-            builder
-                .Entity<Message>()
-                .HasOne(m => m.Recipient)
-                .WithMany(r => r.Messages)
-                .HasForeignKey(m => m.RecipientId);
+            builder.ApplyConfiguration(new CarConfiguration());
 
-            builder
-                .Entity<Car>()
-                .HasMany(c => c.Travels)
-                .WithOne(t => t.Car)
-                .HasForeignKey(t => t.CarId);
+            builder.ApplyConfiguration(new ApplicantTravelConfiguration());
 
-            builder
-                .Entity<ApplicantTravel>()
-                .HasKey(at => new { at.ApplicantId, at.TravelId });
+            builder.ApplyConfiguration(new CategoryConfiguration());
 
-            builder
-                .Entity<ApplicantTravel>()
-                .HasOne(t => t.Applicant)
-                .WithMany(a => a.Applications)
-                .HasForeignKey(t => t.ApplicantId);
+            builder.ApplyConfiguration(new SubforumConfiguration());
 
-            builder
-                .Entity<ApplicantTravel>()
-                .HasOne(p => p.Travel)
-                .WithMany(t => t.Applicants)
-                .HasForeignKey(p => p.TravelId);
+            builder.ApplyConfiguration(new TopicConfiguration());
 
-            builder
-                .Entity<Category>()
-                .HasMany(c => c.Subforums)
-                .WithOne(s => s.Category)
-                .HasForeignKey(s => s.CategoryId);
-
-            builder
-                .Entity<Subforum>()
-                .HasMany(s => s.Topics)
-                .WithOne(t => t.Subforum)
-                .HasForeignKey(t => t.SubforumId);
-
-            builder
-                .Entity<Topic>()
-                .HasMany(t => t.Replies)
-                .WithOne(r => r.Topic)
-                .HasForeignKey(r => r.TopicId);
-
-            builder
-                .Entity<Topic>()
-                .HasOne(t => t.Author)
-                .WithMany(a => a.ForumTopics)
-                .HasForeignKey(t => t.AuthorId);
-
-            builder
-                .Entity<Reply>()
-                .HasOne(r => r.Author)
-                .WithMany(a => a.ForumReplies)
-                .HasForeignKey(r => r.AuthorId);
+            builder.ApplyConfiguration(new ReplyConfiguration());
 
             base.OnModelCreating(builder);
         }
