@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rideshare.Data;
-using Rideshare.Data.Models;
+using Rideshare.Model;
 
 [assembly: HostingStartup(typeof(Rideshare.Web.Areas.Identity.IdentityHostingStartup))]
 namespace Rideshare.Web.Areas.Identity

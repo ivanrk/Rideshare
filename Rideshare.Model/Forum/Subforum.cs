@@ -1,13 +1,11 @@
-﻿namespace Rideshare.Data.Models.Forum
+﻿namespace Rideshare.Model.Forum
 {
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public class Subforum
     {
         public int Id { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
         public int CategoryId { get; set; }

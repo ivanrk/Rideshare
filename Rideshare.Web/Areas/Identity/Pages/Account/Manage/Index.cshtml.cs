@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Rideshare.Data.Models;
+using Rideshare.Model;
 using Rideshare.Services;
 
 namespace Rideshare.Web.Areas.Identity.Pages.Account.Manage

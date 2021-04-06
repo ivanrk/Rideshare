@@ -11,7 +11,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Rideshare.Data;
-    using Rideshare.Data.Models;
+    using Rideshare.Model;
     using Rideshare.Services;
     using Rideshare.Services.Admin.Forum;
     using Rideshare.Services.Admin.Forum.Implementations;

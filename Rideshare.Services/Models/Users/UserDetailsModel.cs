@@ -1,6 +1,6 @@
 ﻿namespace Rideshare.Services.Models.Users
 {
-    using Rideshare.Data.Models;
+    using Rideshare.Model;
     using System.Collections.Generic;
 
     public class UserDetailsModel : UserProfileModel

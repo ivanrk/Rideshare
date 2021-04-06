@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Rideshare.Data.Models.Forum;
+using Rideshare.Model.Forum;
 
 namespace Rideshare.Data.Configurations.Forum
 {

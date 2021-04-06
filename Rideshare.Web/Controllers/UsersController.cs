@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Rideshare.Data.Models;
+    using Rideshare.Model;
     using Rideshare.Services;
     using System.Threading.Tasks;
 

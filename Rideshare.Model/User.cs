@@ -1,13 +1,11 @@
-﻿namespace Rideshare.Data.Models
+﻿namespace Rideshare.Model
 {
     using Microsoft.AspNetCore.Identity;
-    using Rideshare.Data.Models.Forum;
+    using Rideshare.Model.Forum;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public class User : IdentityUser
     {
-        [Required]
         public string Name { get; set; }
 
         public byte[] ProfilePicture { get; set; }

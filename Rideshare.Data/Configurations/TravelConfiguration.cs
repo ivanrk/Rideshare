@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Rideshare.Data.Models;
+using Rideshare.Model;
 
 namespace Rideshare.Data.Configurations
 {

@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Rideshare.Data.Models;
+    using Rideshare.Model;
     using Rideshare.Services;
     using Rideshare.Services.Models.Users;
     using Rideshare.Web.Models.Reviews;

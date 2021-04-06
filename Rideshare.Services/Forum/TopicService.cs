@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
-    using Rideshare.Data.Models.Forum;
+    using Rideshare.Model.Forum;
     using AutoMapper.QueryableExtensions;
     using Rideshare.Services.Models.Forum.Topics;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace Rideshare.Data.Models
+﻿namespace Rideshare.Model
 {
     public class ApplicantTravel
     {

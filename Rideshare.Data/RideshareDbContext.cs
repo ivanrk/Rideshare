@@ -4,8 +4,8 @@
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data.Configurations;
     using Rideshare.Data.Configurations.Forum;
-    using Rideshare.Data.Models;
-    using Rideshare.Data.Models.Forum;
+    using Rideshare.Model;
+    using Rideshare.Model.Forum;
 
     public class RideshareDbContext : IdentityDbContext<User>
     {

@@ -1,17 +1,14 @@
-﻿namespace Rideshare.Data.Models
+﻿namespace Rideshare.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public class Travel
     {
         public int Id { get; set; }
 
-        [Required]
         public string StartingPoint { get; set; }
 
-        [Required]
         public string Destination { get; set; }
 
         public DateTime TravelTime { get; set; }

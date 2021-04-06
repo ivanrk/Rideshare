@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rideshare.Data\Rideshare.Data.csproj" />
+    <ProjectReference Include="..\Rideshare.Model\Rideshare.Model.csproj" />
   </ItemGroup>
 
 </Project>

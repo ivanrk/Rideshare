@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Rideshare.Data.Models;
+    using Rideshare.Model;
     using Rideshare.Services.Admin.Forum;
     using Rideshare.Services.Forum;
     using Rideshare.Web.Areas.Forum.Models.Replies;

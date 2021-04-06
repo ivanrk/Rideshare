@@ -3,7 +3,7 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
-    using Rideshare.Data.Models;
+    using Rideshare.Model;
     using Rideshare.Services.Models.Cars;
     using Rideshare.Services.Models.Travels;
     using Rideshare.Services.Models.Users;

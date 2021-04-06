@@ -1,13 +1,11 @@
-﻿namespace Rideshare.Data.Models.Forum
+﻿namespace Rideshare.Model.Forum
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     public class Reply
     {
         public int Id { get; set; }
 
-        [Required]
         public string Content { get; set; }
 
         public DateTime Published { get; set; }

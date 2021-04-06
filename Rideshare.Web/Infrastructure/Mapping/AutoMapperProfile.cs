@@ -1,8 +1,8 @@
 ﻿namespace Rideshare.Web.Infrastructure.Mapping
 {
     using AutoMapper;
-    using Rideshare.Data.Models;
-    using Rideshare.Data.Models.Forum;
+    using Rideshare.Model;
+    using Rideshare.Model.Forum;
     using Rideshare.Services.Models.Cars;
     using Rideshare.Services.Models.Forum;
     using Rideshare.Services.Models.Forum.Replies;
