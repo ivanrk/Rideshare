@@ -3,8 +3,9 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
-    using Rideshare.Services.Models.Travels;
-    using Rideshare.Services.Models.Users;
+    using Rideshare.Service.Contracts;
+    using Rideshare.Service.Models.Travels;
+    using Rideshare.Service.Models.Users;
     using System;
     using System.Collections.Generic;
     using System.Linq;

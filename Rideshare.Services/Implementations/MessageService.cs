@@ -8,7 +8,8 @@
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
     using Rideshare.Model;
-    using Rideshare.Services.Models.Messages;
+    using Rideshare.Service.Contracts;
+    using Rideshare.Service.Models.Messages;
 
     public class MessageService : IMessageService
     {

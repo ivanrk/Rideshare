@@ -4,8 +4,9 @@
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
     using Rideshare.Model.Forum;
-    using Rideshare.Services.Models.Forum;
-    using Rideshare.Services.Models.Forum.Subforums;
+    using Rideshare.Service.Contracts.Admin.Forum;
+    using Rideshare.Service.Models.Forum.Categories;
+    using Rideshare.Service.Models.Forum.Subforums;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;

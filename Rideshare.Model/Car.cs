@@ -10,11 +10,15 @@
 
         public string Model { get; set; }
 
+        public string Type { get; set; }
+
         public string Color { get; set; }
 
         public int Year { get; set; }
 
         public byte[] Photo { get; set; }
+
+        public string AdditionalInfo { get; set; }
 
         public bool HasRoomForLuggage { get; set; }
 
@@ -27,6 +31,8 @@
         public bool AreDrinksAllowed { get; set; }
 
         public bool ArePetsAllowed { get; set; }
+
+        public bool IsForSale { get; set; }
 
         public string OwnerId { get; set; }
 

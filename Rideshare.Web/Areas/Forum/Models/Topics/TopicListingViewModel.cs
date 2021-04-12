@@ -1,6 +1,6 @@
 ﻿namespace Rideshare.Web.Areas.Forum.Models.Topics
 {
-    using Rideshare.Services.Models.Forum.Topics;
+    using Rideshare.Service.Models.Forum.Topics;
     using System.Collections.Generic;
 
     public class TopicListingViewModel

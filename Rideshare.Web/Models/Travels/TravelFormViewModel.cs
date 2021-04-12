@@ -1,7 +1,7 @@
 ﻿namespace Rideshare.Web.Models.Travels
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Rideshare.Services.Models.Travels;
+    using Rideshare.Service.Models.Travels;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

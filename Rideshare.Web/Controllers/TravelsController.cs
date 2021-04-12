@@ -5,8 +5,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Rideshare.Model;
-    using Rideshare.Services;
-    using Rideshare.Services.Models.Users;
+    using Rideshare.Service.Contracts;
+    using Rideshare.Service.Models.Users;
     using Rideshare.Web.Models.Reviews;
     using Rideshare.Web.Models.Travels;
     using System;

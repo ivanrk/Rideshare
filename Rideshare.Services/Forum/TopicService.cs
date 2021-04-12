@@ -4,11 +4,12 @@
     using Rideshare.Data;
     using Rideshare.Model.Forum;
     using AutoMapper.QueryableExtensions;
-    using Rideshare.Services.Models.Forum.Topics;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System;
+    using Rideshare.Service.Contracts.Forum;
+    using Rideshare.Service.Models.Forum.Topics;
 
     public class TopicService : ITopicService
     {

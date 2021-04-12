@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Rideshare.Data\Rideshare.Data.csproj" />
     <ProjectReference Include="..\Rideshare.Model\Rideshare.Model.csproj" />
+    <ProjectReference Include="..\Rideshare.Service.Contracts\Rideshare.Service.Contracts.csproj" />
     <ProjectReference Include="..\Rideshare.Services\Rideshare.Services.csproj" />
   </ItemGroup>
 

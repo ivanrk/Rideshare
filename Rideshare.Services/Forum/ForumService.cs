@@ -5,7 +5,8 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
-    using Rideshare.Services.Models.Forum;
+    using Rideshare.Service.Contracts.Forum;
+    using Rideshare.Service.Models.Forum.Categories;
 
     public class ForumService : IForumService
     {

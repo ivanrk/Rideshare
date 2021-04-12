@@ -7,12 +7,14 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
+    <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="HtmlSanitizer" Version="5.0.331" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Rideshare.Data\Rideshare.Data.csproj" />
     <ProjectReference Include="..\Rideshare.Model\Rideshare.Model.csproj" />
+    <ProjectReference Include="..\Rideshare.Service.Contracts\Rideshare.Service.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

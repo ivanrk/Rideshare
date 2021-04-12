@@ -4,8 +4,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Rideshare.Model;
-    using Rideshare.Services;
-    using Rideshare.Services.Models.Messages;
+    using Rideshare.Service.Contracts;
+    using Rideshare.Service.Models.Messages;
     using System;
     using System.Threading.Tasks;
 

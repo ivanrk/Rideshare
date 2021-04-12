@@ -1,8 +1,8 @@
 ﻿namespace Rideshare.Web.Areas.Admin.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Rideshare.Services.Admin.Forum;
-    using Rideshare.Services.Models.Forum;
+    using Rideshare.Service.Contracts.Admin.Forum;
+    using Rideshare.Service.Models.Forum.Categories;
     using Rideshare.Web.Areas.Admin.Models.Categories;
     using System.Threading.Tasks;
 

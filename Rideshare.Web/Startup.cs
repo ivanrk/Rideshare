@@ -12,8 +12,9 @@
     using Microsoft.Extensions.DependencyInjection;
     using Rideshare.Data;
     using Rideshare.Model;
-    using Rideshare.Services;
-    using Rideshare.Services.Admin.Forum;
+    using Rideshare.Service.Contracts;
+    using Rideshare.Service.Contracts.Admin.Forum;
+    using Rideshare.Service.Contracts.Forum;
     using Rideshare.Services.Admin.Forum.Implementations;
     using Rideshare.Services.Forum;
     using Rideshare.Services.Implementations;
@@ -57,8 +58,8 @@
                 .AddEntityFrameworkStores<RideshareDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<ICarService, CarService>();
-            services.AddTransient<ITravelService, TravelService>();
+            services.AddTransient<ICarService, CarDapperService>();
+            services.AddTransient<ITravelService, TravelDapperService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IReviewService, ReviewService>();
             services.AddTransient<IPhotoService, PhotoService>();
@@ -117,7 +118,7 @@
 
             app.UseCookiePolicy();
 
-            CreateRoles(serviceProvider);
+            //CreateRoles(serviceProvider);
         }
 
         private void CreateRoles(IServiceProvider serviceProvider)

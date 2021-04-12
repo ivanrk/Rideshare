@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Rideshare.Model;
-    using Rideshare.Services;
+    using Rideshare.Service.Contracts;
     using System.Threading.Tasks;
 
     public class UsersController : Controller

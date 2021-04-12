@@ -2,11 +2,14 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Rideshare.Model.Forum;
+    using System;
     using System.Collections.Generic;
 
     public class User : IdentityUser
     {
         public string Name { get; set; }
+
+        public DateTime Birthdate { get; set; }
 
         public byte[] ProfilePicture { get; set; }
 

@@ -2,8 +2,8 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Rideshare.Services.Admin.Forum;
-    using Rideshare.Services.Models.Forum;
+    using Rideshare.Service.Contracts.Admin.Forum;
+    using Rideshare.Service.Models.Forum.Categories;
     using Rideshare.Web.Areas.Admin.Models.Subforums;
     using System.Collections.Generic;
     using System.Linq;

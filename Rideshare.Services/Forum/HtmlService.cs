@@ -1,6 +1,7 @@
 ﻿namespace Rideshare.Services.Forum
 {
     using Ganss.XSS;
+    using Rideshare.Service.Contracts.Forum;
 
     public class HtmlService : IHtmlService
     {

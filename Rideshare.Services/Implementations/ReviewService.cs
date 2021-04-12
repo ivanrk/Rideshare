@@ -3,6 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
     using Rideshare.Model;
+    using Rideshare.Service.Contracts;
     using System.Threading.Tasks;
 
     public class ReviewService : IReviewService

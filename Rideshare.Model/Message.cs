@@ -21,5 +21,7 @@
         public User Sender { get; set; }
 
         public bool IsRead { get; set; }
+
+        public bool IsSent { get; set; }
     }
 }

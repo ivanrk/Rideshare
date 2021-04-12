@@ -1,7 +1,7 @@
 ﻿namespace Rideshare.Web.Areas.Forum.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using Rideshare.Services.Forum;
+    using Rideshare.Service.Contracts.Forum;
     using System.Threading.Tasks;
 
     public class HomeController : BaseController

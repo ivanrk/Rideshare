@@ -7,7 +7,8 @@
     using Microsoft.EntityFrameworkCore;
     using Rideshare.Data;
     using Rideshare.Model.Forum;
-    using Rideshare.Services.Models.Forum;
+    using Rideshare.Service.Contracts.Admin.Forum;
+    using Rideshare.Service.Models.Forum.Categories;
 
     public class CategoryService : ICategoryService
     {

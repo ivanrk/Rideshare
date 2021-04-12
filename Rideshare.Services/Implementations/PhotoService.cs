@@ -1,7 +1,7 @@
 ﻿namespace Rideshare.Services.Implementations
 {
     using Microsoft.AspNetCore.Http;
-    using System;
+    using Rideshare.Service.Contracts;
     using System.IO;
     using System.Threading.Tasks;
 

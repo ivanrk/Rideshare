@@ -4,8 +4,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Rideshare.Model;
-    using Rideshare.Services.Admin.Forum;
-    using Rideshare.Services.Forum;
+    using Rideshare.Service.Contracts.Admin.Forum;
+    using Rideshare.Service.Contracts.Forum;
     using Rideshare.Web.Areas.Forum.Models.Replies;
     using Rideshare.Web.Areas.Forum.Models.Topics;
     using System.Threading.Tasks;

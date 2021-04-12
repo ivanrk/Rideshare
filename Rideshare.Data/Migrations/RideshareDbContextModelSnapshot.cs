@@ -15,7 +15,7 @@ namespace Rideshare.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -129,7 +129,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.ApplicantTravel", b =>
+            modelBuilder.Entity("Rideshare.Model.ApplicantTravel", b =>
                 {
                     b.Property<string>("ApplicantId");
 
@@ -142,11 +142,13 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("ApplicantTravel");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Car", b =>
+            modelBuilder.Entity("Rideshare.Model.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AdditionalInfo");
 
                     b.Property<bool>("AreDrinksAllowed");
 
@@ -161,6 +163,8 @@ namespace Rideshare.Data.Migrations
 
                     b.Property<bool>("IsFoodAllowed");
 
+                    b.Property<bool>("IsForSale");
+
                     b.Property<bool>("IsSmokingAllowed");
 
                     b.Property<string>("Make")
@@ -173,6 +177,8 @@ namespace Rideshare.Data.Migrations
 
                     b.Property<byte[]>("Photo");
 
+                    b.Property<string>("Type");
+
                     b.Property<int>("Year");
 
                     b.HasKey("Id");
@@ -182,7 +188,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Category", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,7 +202,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Reply", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Reply", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,7 +226,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Replies");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Subforum", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Subforum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -238,7 +244,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Subforums");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Topic", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Topic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -265,7 +271,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Topics");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Message", b =>
+            modelBuilder.Entity("Rideshare.Model.Message", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -276,6 +282,8 @@ namespace Rideshare.Data.Migrations
                     b.Property<DateTime>("DateTime");
 
                     b.Property<bool>("IsRead");
+
+                    b.Property<bool>("IsSent");
 
                     b.Property<string>("RecipientId");
 
@@ -293,7 +301,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.PassengerTravel", b =>
+            modelBuilder.Entity("Rideshare.Model.PassengerTravel", b =>
                 {
                     b.Property<string>("PassengerId");
 
@@ -306,7 +314,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("PassengerTravel");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Review", b =>
+            modelBuilder.Entity("Rideshare.Model.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,7 +337,7 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Travel", b =>
+            modelBuilder.Entity("Rideshare.Model.Travel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -362,12 +370,14 @@ namespace Rideshare.Data.Migrations
                     b.ToTable("Travels");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.User", b =>
+            modelBuilder.Entity("Rideshare.Model.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<DateTime>("Birthdate");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -428,7 +438,7 @@ namespace Rideshare.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User")
+                    b.HasOne("Rideshare.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -436,7 +446,7 @@ namespace Rideshare.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User")
+                    b.HasOne("Rideshare.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -449,7 +459,7 @@ namespace Rideshare.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Rideshare.Data.Models.User")
+                    b.HasOne("Rideshare.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -457,107 +467,107 @@ namespace Rideshare.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User")
+                    b.HasOne("Rideshare.Model.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.ApplicantTravel", b =>
+            modelBuilder.Entity("Rideshare.Model.ApplicantTravel", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Applicant")
+                    b.HasOne("Rideshare.Model.User", "Applicant")
                         .WithMany("Applications")
                         .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Rideshare.Data.Models.Travel", "Travel")
+                    b.HasOne("Rideshare.Model.Travel", "Travel")
                         .WithMany("Applicants")
                         .HasForeignKey("TravelId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Car", b =>
+            modelBuilder.Entity("Rideshare.Model.Car", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Owner")
+                    b.HasOne("Rideshare.Model.User", "Owner")
                         .WithMany("Cars")
                         .HasForeignKey("OwnerId");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Reply", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Reply", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Author")
+                    b.HasOne("Rideshare.Model.User", "Author")
                         .WithMany("ForumReplies")
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Rideshare.Data.Models.Forum.Topic", "Topic")
+                    b.HasOne("Rideshare.Model.Forum.Topic", "Topic")
                         .WithMany("Replies")
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Subforum", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Subforum", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.Forum.Category", "Category")
+                    b.HasOne("Rideshare.Model.Forum.Category", "Category")
                         .WithMany("Subforums")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Forum.Topic", b =>
+            modelBuilder.Entity("Rideshare.Model.Forum.Topic", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Author")
+                    b.HasOne("Rideshare.Model.User", "Author")
                         .WithMany("ForumTopics")
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Rideshare.Data.Models.Forum.Subforum", "Subforum")
+                    b.HasOne("Rideshare.Model.Forum.Subforum", "Subforum")
                         .WithMany("Topics")
                         .HasForeignKey("SubforumId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Message", b =>
+            modelBuilder.Entity("Rideshare.Model.Message", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Recipient")
+                    b.HasOne("Rideshare.Model.User", "Recipient")
                         .WithMany("Messages")
                         .HasForeignKey("RecipientId");
 
-                    b.HasOne("Rideshare.Data.Models.User", "Sender")
+                    b.HasOne("Rideshare.Model.User", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.PassengerTravel", b =>
+            modelBuilder.Entity("Rideshare.Model.PassengerTravel", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Passenger")
+                    b.HasOne("Rideshare.Model.User", "Passenger")
                         .WithMany("Travels")
                         .HasForeignKey("PassengerId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Rideshare.Data.Models.Travel", "Travel")
+                    b.HasOne("Rideshare.Model.Travel", "Travel")
                         .WithMany("Passengers")
                         .HasForeignKey("TravelId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Review", b =>
+            modelBuilder.Entity("Rideshare.Model.Review", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.User", "Author")
+                    b.HasOne("Rideshare.Model.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("Rideshare.Data.Models.User", "User")
+                    b.HasOne("Rideshare.Model.User", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("Rideshare.Data.Models.Travel", b =>
+            modelBuilder.Entity("Rideshare.Model.Travel", b =>
                 {
-                    b.HasOne("Rideshare.Data.Models.Car", "Car")
+                    b.HasOne("Rideshare.Model.Car", "Car")
                         .WithMany("Travels")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Rideshare.Data.Models.User", "Driver")
+                    b.HasOne("Rideshare.Model.User", "Driver")
                         .WithMany()
                         .HasForeignKey("DriverId");
                 });
